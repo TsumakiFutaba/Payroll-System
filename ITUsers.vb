@@ -8,14 +8,14 @@ Public Class ITUsers
     End Sub
 
     Public Sub FetchData()
-        Dim columnsToFetch As String = "ID, Name, Username, Password"
+        Dim columnsToFetch As String = "employee_id, employee_name, usrname, pw"
 
         Dim query As String = $"SELECT {columnsToFetch} FROM Employee_Info"
 
         Dim dataTable As New DataTable
 
 
-        Using con As New SqlConnection("Data Source=DESKTOP-9FJ16TI\SQLEXPRESS;Initial Catalog=payrolldatabase;Integrated Security=true")
+        Using con As New SqlConnection("Data Source=DESKTOP-44FGDPO\SQLEXPRESS;Initial Catalog=payrolldatabase;Integrated Security=true")
             con.Open()
             Using adapter As New SqlDataAdapter(query, con)
                 adapter.Fill(dataTable)

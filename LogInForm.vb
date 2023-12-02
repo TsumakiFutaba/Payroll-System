@@ -3,7 +3,9 @@ Imports System.Diagnostics.Eventing
 
 
 Public Class LogInForm
-    Dim con As New SqlConnection("Data Source=DESKTOP-9FJ16TI\SQLEXPRESS;Initial Catalog=payrolldatabase;Integrated Security=true")
+    Dim engine = "DESKTOP-44FGDPO\SQLEXPRESS"
+    Dim db = "payrolldatabase"
+    Dim con As New SqlConnection("Data Source=" + engine + "\SQLEXPRESS;Initial Catalog=" + db + ";Integrated Security=true")
     Dim cmd As New SqlCommand
     Dim sd As New SqlDataAdapter
     Dim dt As New DataTable
@@ -86,12 +88,12 @@ Public Class LogInForm
 
                 attempt += 1
                 If attempt = 3 Then
-                        tbUsername.Enabled = False
-                        tbPassword.Enabled = False
-                        btnLogin.Enabled = False
+                    tbUsername.Enabled = False
+                    tbPassword.Enabled = False
+                    btnLogin.Enabled = False
                     MessageBox.Show("3 attempts has been used. Please contact the IT Admin to unlock.")
                     Me.Show()
-                    End If
+                End If
 
             End If
         End If
