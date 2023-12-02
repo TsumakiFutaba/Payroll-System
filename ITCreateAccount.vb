@@ -1,7 +1,7 @@
 ﻿Imports System.Data.SqlClient
 
 Public Class ITCreateAccount
-    Dim con As New SqlConnection("Data Source=DESKTOP-V5VR7RP\SQLEXPRESS;Initial Catalog=payrolldatabase;Integrated Security=true")
+    Dim con As New SqlConnection("Data Source=DESKTOP-9FJ16TI\SQLEXPRESS;Initial Catalog=payrolldatabase;Integrated Security=true")
     Dim cmd As New SqlCommand
     Dim sd As New SqlDataAdapter
     Dim dt As New DataTable
@@ -20,8 +20,9 @@ Public Class ITCreateAccount
 
         'cmd = New SqlCommand("insert into dbo.Employee_Info values ('" & tbName.Text & "','" & tbAge.Text & "','" & tbGender.Text & "','" & DateTimePickDOB.Text & "','" & cbPosition.Text & "','" & tbPreferredUsername.Text & "','" & tbPreferredPassword.Text & "','" & tbSSS.Text & "','" & "','" & tbPhilhealth.Text & "','" & "','" & tbPagIbig.Text & "')", con)
         'cmd.ExecuteNonQuery()
+        ' (ID, Name, Age, Gender, Birthday, Email, Position, Username, Password, SSS, Philhealth, Pagibig) 
 
-        cmd = New SqlCommand("INSERT INTO dbo.Employee_Info VALUES (@ID, @Name, @Age, @Gender, @Birthday, @Email, @Position, @Username, @Password, @SSS, @Philhealth, @PagIbig, @LoginAttempts)", con)
+        cmd = New SqlCommand("INSERT INTO Employee_Info (ID, Name, Age, Gender, Birthday, Email, Position, Username, Password, SSS, Philhealth, Pagibig) VALUES (@ID, @Name, @Age, @Gender, @Birthday, @Email, @Position, @Username, @Password, @SSS, @Philhealth, @Pagibig)", con)
 
         cmd.Parameters.AddWithValue("@ID", tbID.Text)
         cmd.Parameters.AddWithValue("@Name", tbName.Text)
@@ -34,8 +35,8 @@ Public Class ITCreateAccount
         cmd.Parameters.AddWithValue("@Password", tbPreferredPassword.Text)
         cmd.Parameters.AddWithValue("@SSS", tbSSS.Text)
         cmd.Parameters.AddWithValue("@Philhealth", tbPhilhealth.Text)
-        cmd.Parameters.AddWithValue("@PagIbig", tbPagIbig.Text)
-        cmd.Parameters.AddWithValue("@LoginAttempts", 0)
+        cmd.Parameters.AddWithValue("@Pagibig", tbPagIbig.Text)
+
 
         cmd.ExecuteNonQuery()
 

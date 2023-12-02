@@ -3,7 +3,7 @@ Imports System.Diagnostics.Eventing
 
 
 Public Class LogInForm
-    Dim con As New SqlConnection("Data Source=DESKTOP-V5VR7RP\SQLEXPRESS;Initial Catalog=payrolldatabase;Integrated Security=true")
+    Dim con As New SqlConnection("Data Source=DESKTOP-9FJ16TI\SQLEXPRESS;Initial Catalog=payrolldatabase;Integrated Security=true")
     Dim cmd As New SqlCommand
     Dim sd As New SqlDataAdapter
     Dim dt As New DataTable
