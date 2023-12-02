@@ -1,7 +1,9 @@
 ﻿Imports System.Data.SqlClient
 
 Public Class ITCreateAccount
-    Dim con As New SqlConnection("Data Source=DESKTOP-9FJ16TI\SQLEXPRESS;Initial Catalog=payrolldatabase;Integrated Security=true")
+    Dim engine = "DESKTOP-44FGDPO\SQLEXPRESS"
+    Dim db = "payrolldatabase"
+    Dim con As New SqlConnection("Data Source=" + engine + "\SQLEXPRESS;Initial Catalog=" + db + ";Integrated Security=true")
     Dim cmd As New SqlCommand
     Dim sd As New SqlDataAdapter
     Dim dt As New DataTable
@@ -22,20 +24,20 @@ Public Class ITCreateAccount
         'cmd.ExecuteNonQuery()
         ' (ID, Name, Age, Gender, Birthday, Email, Position, Username, Password, SSS, Philhealth, Pagibig) 
 
-        cmd = New SqlCommand("INSERT INTO Employee_Info (ID, Name, Age, Gender, Birthday, Email, Position, Username, Password, SSS, Philhealth, Pagibig) VALUES (@ID, @Name, @Age, @Gender, @Birthday, @Email, @Position, @Username, @Password, @SSS, @Philhealth, @Pagibig)", con)
+        cmd = New SqlCommand("INSERT INTO Employee_Info VALUES (@employee_id, @employee_name, @age, @gender, @bday, @email, @position, @usrname, @pw, @sss, @philhealth, @pagibig)", con)
 
-        cmd.Parameters.AddWithValue("@ID", tbID.Text)
-        cmd.Parameters.AddWithValue("@Name", tbName.Text)
-        cmd.Parameters.AddWithValue("@Age", tbAge.Text)
-        cmd.Parameters.AddWithValue("@Gender", cbGender.Text)
-        cmd.Parameters.AddWithValue("@Birthday", DateTimePickDOB.Value)
-        cmd.Parameters.AddWithValue("@Email", tbEmail.Text)
-        cmd.Parameters.AddWithValue("@Position", cbPosition.Text)
-        cmd.Parameters.AddWithValue("@Username", tbPreferredUsername.Text)
-        cmd.Parameters.AddWithValue("@Password", tbPreferredPassword.Text)
-        cmd.Parameters.AddWithValue("@SSS", tbSSS.Text)
-        cmd.Parameters.AddWithValue("@Philhealth", tbPhilhealth.Text)
-        cmd.Parameters.AddWithValue("@Pagibig", tbPagIbig.Text)
+        cmd.Parameters.AddWithValue("@employee_id", tbID.Text)
+        cmd.Parameters.AddWithValue("@employee_name", tbName.Text)
+        cmd.Parameters.AddWithValue("@age", tbAge.Text)
+        cmd.Parameters.AddWithValue("@gender", cbGender.Text)
+        cmd.Parameters.AddWithValue("@bday", DateTimePickDOB.Value)
+        cmd.Parameters.AddWithValue("@email", tbEmail.Text)
+        cmd.Parameters.AddWithValue("@position", cbPosition.Text)
+        cmd.Parameters.AddWithValue("@usrname", tbPreferredUsername.Text)
+        cmd.Parameters.AddWithValue("@pw", tbPreferredPassword.Text)
+        cmd.Parameters.AddWithValue("@sss", tbSSS.Text)
+        cmd.Parameters.AddWithValue("@philhealth", tbPhilhealth.Text)
+        cmd.Parameters.AddWithValue("@pagibig", tbPagIbig.Text)
 
 
         cmd.ExecuteNonQuery()

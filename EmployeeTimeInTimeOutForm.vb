@@ -1,6 +1,8 @@
 ﻿Imports System.Data.SqlClient
 Public Class EmployeeTimeInTimeOutForm
-    Dim con As New SqlConnection("Data Source=DESKTOP-V5VR7RP\SQLEXPRESS;Initial Catalog=payrolldatabase;Integrated Security=true")
+    Dim engine = "DESKTOP-44FGDPO\SQLEXPRESS"
+    Dim db = "payrolldatabase"
+    Dim con As New SqlConnection("Data Source=" + engine + "\SQLEXPRESS;Initial Catalog=" + db + ";Integrated Security=true")
 
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
