@@ -15,7 +15,7 @@ Public Class ITUsers
         Dim dataTable As New DataTable
 
 
-        Using con As New SqlConnection("Data Source=DESKTOP-44FGDPO\SQLEXPRESS;Initial Catalog=payrolldatabase;Integrated Security=true")
+        Using con As New SqlConnection("Data Source=DESKTOP-9FJ16TI\SQLEXPRESS;Initial Catalog=payrolldatabase;Integrated Security=true")
             con.Open()
             Using adapter As New SqlDataAdapter(query, con)
                 adapter.Fill(dataTable)

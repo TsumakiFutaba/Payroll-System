@@ -1,62 +1,110 @@
 ﻿Imports System.Data.SqlClient
 Public Class EmployeeTimeInTimeOutForm
-    Dim engine = "DESKTOP-44FGDPO\SQLEXPRESS"
+    Dim engine = "localhost, 1433"
     Dim db = "payrolldatabase"
-    Dim con As New SqlConnection("Data Source=" + engine + "\SQLEXPRESS;Initial Catalog=" + db + ";Integrated Security=true")
-
+    Dim con As New SqlConnection("Data Source=" + engine + ";Initial Catalog=" + db + ";Integrated Security=true")
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         LabelDate.Text = Date.Now.ToString("yyyy/M/dd")
         LabelTime.Text = Date.Now.ToString("HH:mm:ss tt")
     End Sub
 
-    Private Sub btnTimeInOut_Click(sender As Object, e As EventArgs) Handles btnTimeInOut.Click
-#If False Then
-        Try
-            If EMPLOYEEID.Text = "" Then
-                MessageBox.Show("Please enter your Employee ID", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Else
-                reloadtxt("SELECT * FROM Employee_Information_ WHERE EmployeeID='" & EMPLOYEEID.Text & "'")
-                If dt.Rows.Count > 0 Then
-                    reloadtxt("SELECT * FROM Employee_Attendance WHERE EmployeeID='" & EMPLOYEEID.Text & "' AND LOGDATE='" & LabelDate.Text & "' AND AM_STATUS='Time In' AND PM_STATUS='Time Out'")
-                    If dt.Rows.Count > 0 Then
-                        MessageBox.Show("You have already timed in and out for today", "Already", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    Else
-                        reloadtxt("SELECT * FROM Employee_Attendance WHERE EmployeeID ='" & EMPLOYEEID.Text & "' AND LOGDATE='" & LabelDate.Text & "' AND AM_STAUTS='Time In'")
-                        If dt.Rows.Count > 0 Then
-                            updateLogged("UPDATE Employee_Attendance SET TIMEOUT='" & TimeOfDay & "', PM_STATUS='Time Out' WHERE EmployeeID='" & btnTimeInOut.Text & "' AND LOGDATE='" & LabelDate.Text & "'")
-                            MessageBox.Show("Successfully Timed Out!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                        Else
-                            createLogged("INSERT INTO Employee_Attendance(EmployeeID,LOGDATE,TIMEIN,AM_STATUS)VALUES('" & btnTimeInOut.Text & "','" & LabelDate.Text & "','" & TimeOfDay & "','TIme In')")
-                            MessageBox.Show("Successfully Timed In!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    Private Sub btnTimeInOut_Click(sender As Object, e As EventArgs) Handles btnTimeIn.Click
 
-                        End If
-                    End If
+        Dim USERNAME As String = lblUsername.Text
+        Dim inTime As String = LabelTime.Text
+        Dim inDate As String = LabelDate.Text
+        Dim inStatus As String = "Time In"
+        Dim validate As String = "SELECT * FROM Employee_Attendances WHERE [USERNAME] = @USERNAME AND [inDate]=@inDate AND [inStatus]=@inStatus"
+        Using con As SqlConnection = New SqlConnection("Data Source=" + engine + ";Initial Catalog=" + db + ";Integrated Security=true;Pooling=False")
+            Using cmd As SqlCommand = New SqlCommand(validate, con)
+                cmd.Parameters.AddWithValue("@USERNAME", USERNAME)
+                cmd.Parameters.AddWithValue("@inDate", inDate)
+                cmd.Parameters.AddWithValue("inStatus", inStatus)
+                Dim adapter As New SqlDataAdapter(cmd)
+                Dim myTable As New DataTable
+
+                adapter.Fill(myTable)
+                If myTable.Rows.Count > 0 Then
+                    MessageBox.Show("You have already time-in for today!", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Hand)
                 Else
-                    MessageBox.Show("Employee ID not found.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+                    Dim addquery As String = "INSERT INTO Employee_Attendances([USERNAME],[inTime],[inDate],[inStatus])VALUES(@USERNAME,@inTime,@inDate,@inStatus)"
+                    Dim com = New SqlCommand(addquery, con)
+
+                    com.Parameters.AddWithValue("@USERNAME", USERNAME)
+                    com.Parameters.AddWithValue("inTime", inTime)
+                    com.Parameters.AddWithValue("inDate", inDate)
+                    com.Parameters.AddWithValue("inStatus", inStatus)
+
+                    Dim x As Integer = 0
+                    Try
+                        con.Open()
+                        x = com.ExecuteNonQuery()
+                    Catch ex As Exception
+                        MessageBox.Show(ex.Message)
+                    Finally
+                        con.Close()
+                        cmd.Parameters.Clear()
+                    End Try
+                    Select Case x
+                        Case 1
+                            MessageBox.Show("Successfully Added Time-Out!", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        Case 0
+                            MessageBox.Show("Wrong Entry.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End Select
                 End If
-            End If
-        Catch ex As Exception
-
-        End Try
-#End If
-#If False Then
-         con.Open()
-
-        Dim str As String = "SELECT * FROM Employee_Info WHERE Username = '" & LogInForm.tbUsername.Text & "' AND Password = '" & LogInForm.tbPassword.Text & "'"
-
-        Dim cmd As New SqlCommand(str, con)
-
-        Dim DR As SqlDataReader
-        DR = cmd.ExecuteReader
-#End If
-
-
-
-
+            End Using
+        End Using
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnTimeOut.Click
+
+        Dim USERNAME As String = lblUsername.Text
+        Dim inDate As String = LabelDate.Text
+        Dim outTime As String = LabelTime.Text
+        Dim outDate As String = LabelDate.Text
+        Dim outStatus As String = "Time Out"
+        Dim validate As String = "SELECT * FROM Employee_Attendances WHERE [USERNAME] = @USERNAME AND [outDate]=@outDate AND [outStatus]=@outStatus"
+        Using con As SqlConnection = New SqlConnection("Data Source=" + engine + ";Initial Catalog=" + db + ";Integrated Security=true;Pooling=False")
+            Using cmd As SqlCommand = New SqlCommand(validate, con)
+                cmd.Parameters.AddWithValue("@USERNAME", USERNAME)
+                cmd.Parameters.AddWithValue("@outDate", outDate)
+                cmd.Parameters.AddWithValue("outStatus", outStatus)
+                Dim adapter As New SqlDataAdapter(cmd)
+                Dim myTable As New DataTable
+
+                adapter.Fill(myTable)
+                If myTable.Rows.Count > 0 Then
+                    MessageBox.Show("You have already time-out for today!", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+                Else
+                    Dim addquery As String = "UPDATE Employee_Attendances SET outTime=@outTime,outDate=@outDate,outStatus=@outStatus WHERE USERNAME=@USERNAME AND inDate=@inDate"
+                    Dim com = New SqlCommand(addquery, con)
+
+                    com.Parameters.AddWithValue("@USERNAME", USERNAME)
+                    com.Parameters.AddWithValue("inDate", inDate)
+                    com.Parameters.AddWithValue("outTime", outTime)
+                    com.Parameters.AddWithValue("outDate", outDate)
+                    com.Parameters.AddWithValue("outStatus", outStatus)
+
+                    Dim x As Integer = 0
+                    Try
+                        con.Open()
+                        x = com.ExecuteNonQuery()
+                    Catch ex As Exception
+                        MessageBox.Show(ex.Message)
+                    Finally
+                        con.Close()
+                        cmd.Parameters.Clear()
+                    End Try
+                    Select Case x
+                        Case 1
+                            MessageBox.Show("Successfully Added Time-Out!", "INFORMATION", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        Case 0
+                            MessageBox.Show("Wrong Entry.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End Select
+                End If
+            End Using
+        End Using
 
     End Sub
 End Class

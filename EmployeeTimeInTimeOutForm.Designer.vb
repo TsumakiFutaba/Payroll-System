@@ -26,10 +26,8 @@ Partial Class EmployeeTimeInTimeOutForm
         LabelDate = New Label()
         Timer1 = New Timer(components)
         Panel1 = New Panel()
-        Button1 = New Button()
-        EMPLOYEEID = New TextBox()
-        btnTimeInOut = New Button()
-        Label2 = New Label()
+        btnTimeOut = New Button()
+        btnTimeIn = New Button()
         PictureBox1 = New PictureBox()
         lblUsername = New Label()
         Panel2 = New Panel()
@@ -62,10 +60,8 @@ Partial Class EmployeeTimeInTimeOutForm
         ' Panel1
         ' 
         Panel1.BackColor = Color.WhiteSmoke
-        Panel1.Controls.Add(Button1)
-        Panel1.Controls.Add(EMPLOYEEID)
-        Panel1.Controls.Add(btnTimeInOut)
-        Panel1.Controls.Add(Label2)
+        Panel1.Controls.Add(btnTimeOut)
+        Panel1.Controls.Add(btnTimeIn)
         Panel1.Controls.Add(PictureBox1)
         Panel1.Controls.Add(lblUsername)
         Panel1.Dock = DockStyle.Fill
@@ -74,60 +70,41 @@ Partial Class EmployeeTimeInTimeOutForm
         Panel1.Size = New Size(770, 393)
         Panel1.TabIndex = 1
         ' 
-        ' Button1
+        ' btnTimeOut
         ' 
-        Button1.BackColor = Color.FromArgb(CByte(70), CByte(80), CByte(90))
-        Button1.FlatAppearance.BorderColor = Color.FromArgb(CByte(70), CByte(80), CByte(90))
-        Button1.FlatAppearance.MouseOverBackColor = Color.FromArgb(CByte(70), CByte(80), CByte(90))
-        Button1.FlatStyle = FlatStyle.Flat
-        Button1.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point)
-        Button1.ForeColor = Color.White
-        Button1.Location = New Point(403, 294)
-        Button1.Name = "Button1"
-        Button1.Size = New Size(261, 60)
-        Button1.TabIndex = 24
-        Button1.Text = "TIME OUT"
-        Button1.UseVisualStyleBackColor = False
+        btnTimeOut.BackColor = Color.FromArgb(CByte(70), CByte(80), CByte(90))
+        btnTimeOut.FlatAppearance.BorderColor = Color.FromArgb(CByte(70), CByte(80), CByte(90))
+        btnTimeOut.FlatAppearance.MouseOverBackColor = Color.FromArgb(CByte(70), CByte(80), CByte(90))
+        btnTimeOut.FlatStyle = FlatStyle.Flat
+        btnTimeOut.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point)
+        btnTimeOut.ForeColor = Color.White
+        btnTimeOut.Location = New Point(415, 269)
+        btnTimeOut.Name = "btnTimeOut"
+        btnTimeOut.Size = New Size(261, 60)
+        btnTimeOut.TabIndex = 24
+        btnTimeOut.Text = "TIME OUT"
+        btnTimeOut.UseVisualStyleBackColor = False
         ' 
-        ' EMPLOYEEID
+        ' btnTimeIn
         ' 
-        EMPLOYEEID.Location = New Point(345, 237)
-        EMPLOYEEID.Name = "EMPLOYEEID"
-        EMPLOYEEID.Size = New Size(319, 23)
-        EMPLOYEEID.TabIndex = 22
-        ' 
-        ' btnTimeInOut
-        ' 
-        btnTimeInOut.BackColor = Color.FromArgb(CByte(70), CByte(80), CByte(90))
-        btnTimeInOut.FlatAppearance.BorderColor = Color.FromArgb(CByte(70), CByte(80), CByte(90))
-        btnTimeInOut.FlatAppearance.MouseOverBackColor = Color.FromArgb(CByte(70), CByte(80), CByte(90))
-        btnTimeInOut.FlatStyle = FlatStyle.Flat
-        btnTimeInOut.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point)
-        btnTimeInOut.ForeColor = Color.White
-        btnTimeInOut.Location = New Point(126, 294)
-        btnTimeInOut.Name = "btnTimeInOut"
-        btnTimeInOut.Size = New Size(261, 60)
-        btnTimeInOut.TabIndex = 23
-        btnTimeInOut.Text = "TIME IN"
-        btnTimeInOut.UseVisualStyleBackColor = False
-        ' 
-        ' Label2
-        ' 
-        Label2.AutoSize = True
-        Label2.BackColor = Color.White
-        Label2.Font = New Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point)
-        Label2.ForeColor = SystemColors.ControlDarkDark
-        Label2.Location = New Point(126, 232)
-        Label2.Name = "Label2"
-        Label2.Size = New Size(213, 25)
-        Label2.TabIndex = 21
-        Label2.Text = "Enter your Employee ID:"
+        btnTimeIn.BackColor = Color.FromArgb(CByte(70), CByte(80), CByte(90))
+        btnTimeIn.FlatAppearance.BorderColor = Color.FromArgb(CByte(70), CByte(80), CByte(90))
+        btnTimeIn.FlatAppearance.MouseOverBackColor = Color.FromArgb(CByte(70), CByte(80), CByte(90))
+        btnTimeIn.FlatStyle = FlatStyle.Flat
+        btnTimeIn.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point)
+        btnTimeIn.ForeColor = Color.White
+        btnTimeIn.Location = New Point(106, 269)
+        btnTimeIn.Name = "btnTimeIn"
+        btnTimeIn.Size = New Size(261, 60)
+        btnTimeIn.TabIndex = 23
+        btnTimeIn.Text = "TIME IN"
+        btnTimeIn.UseVisualStyleBackColor = False
         ' 
         ' PictureBox1
         ' 
         PictureBox1.BackColor = Color.Transparent
         PictureBox1.Image = My.Resources.Resources.Untitled_design1
-        PictureBox1.Location = New Point(310, 6)
+        PictureBox1.Location = New Point(313, 37)
         PictureBox1.Name = "PictureBox1"
         PictureBox1.Size = New Size(160, 150)
         PictureBox1.TabIndex = 20
@@ -136,10 +113,10 @@ Partial Class EmployeeTimeInTimeOutForm
         ' lblUsername
         ' 
         lblUsername.AutoSize = True
-        lblUsername.BackColor = Color.White
+        lblUsername.BackColor = Color.WhiteSmoke
         lblUsername.Font = New Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point)
         lblUsername.ForeColor = SystemColors.ControlDarkDark
-        lblUsername.Location = New Point(286, 169)
+        lblUsername.Location = New Point(283, 209)
         lblUsername.Name = "lblUsername"
         lblUsername.Size = New Size(224, 45)
         lblUsername.TabIndex = 19
@@ -214,10 +191,8 @@ Partial Class EmployeeTimeInTimeOutForm
     Friend WithEvents Panel4 As Panel
     Friend WithEvents Panel3 As Panel
     Friend WithEvents LabelTime As Label
-    Friend WithEvents EMPLOYEEID As TextBox
-    Friend WithEvents btnTimeInOut As Button
-    Friend WithEvents Label2 As Label
+    Friend WithEvents btnTimeIn As Button
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents lblUsername As Label
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnTimeOut As Button
 End Class

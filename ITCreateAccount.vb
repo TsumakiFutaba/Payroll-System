@@ -1,9 +1,9 @@
 ﻿Imports System.Data.SqlClient
 
 Public Class ITCreateAccount
-    Dim engine = "DESKTOP-44FGDPO\SQLEXPRESS"
+    Dim engine = "localhost, 1433"
     Dim db = "payrolldatabase"
-    Dim con As New SqlConnection("Data Source=" + engine + "\SQLEXPRESS;Initial Catalog=" + db + ";Integrated Security=true")
+    Dim con As New SqlConnection("Data Source=" + engine + ";Initial Catalog=" + db + ";Integrated Security=true")
     Dim cmd As New SqlCommand
     Dim sd As New SqlDataAdapter
     Dim dt As New DataTable

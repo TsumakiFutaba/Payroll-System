@@ -3,9 +3,9 @@ Imports System.Diagnostics.Eventing
 
 
 Public Class LogInForm
-    Dim engine = "DESKTOP-44FGDPO\SQLEXPRESS"
+    Dim engine = "localhost, 1433"
     Dim db = "payrolldatabase"
-    Dim con As New SqlConnection("Data Source=" + engine + "\SQLEXPRESS;Initial Catalog=" + db + ";Integrated Security=true")
+    Dim con As New SqlConnection("Data Source=" + engine + ";Initial Catalog=" + db + ";Integrated Security=true")
     Dim cmd As New SqlCommand
     Dim sd As New SqlDataAdapter
     Dim dt As New DataTable
@@ -35,16 +35,16 @@ Public Class LogInForm
         End If
         Me.Hide()
 
-        Dim username As String = tbUsername.Text
-        Dim password As String = tbPassword.Text
+        Dim usrname As String = tbUsername.Text
+        Dim pw As String = tbPassword.Text
 
         If con.State = ConnectionState.Open Then con.Close()
 
-        If username = "" Or password = "" Then
+        If usrname = "" Or pw = "" Then
             MessageBox.Show("Username and Password do not match.", "Message...", MessageBoxButtons.OK)
 
         Else
-            str = "SELECT * FROM Employee_Info WHERE Username = '" & tbUsername.Text & "' AND Password = '" & tbPassword.Text & "'"
+            str = "SELECT * FROM Employee_Info WHERE usrname = '" & tbUsername.Text & "' AND pw = '" & tbPassword.Text & "'"
             con.Open()
 
             Dim mysC As New SqlCommand(str, con)
@@ -55,12 +55,11 @@ Public Class LogInForm
             If DR.HasRows Then
 
                 While DR.Read
-                    fullName = DR.GetString("Name").ToUpper
-                    email = DR.GetString("Email")
-                    employeeUN = DR.GetString("Username")
-                    employeePW = DR.GetString("Password")
-                    employeeID = DR.GetInt32("ID")
-                    attempt = DR.GetInt32("LoginAttempts")
+                    fullName = DR.GetString("employee_name").ToUpper
+                    email = DR.GetString("email")
+                    employeeUN = DR.GetString("usrname")
+                    employeePW = DR.GetString("pw")
+                    employeeID = DR.GetInt32("employee_id")
 
 
                 End While
