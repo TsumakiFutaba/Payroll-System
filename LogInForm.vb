@@ -1,106 +1,49 @@
 ﻿Imports System.Data.SqlClient
-Imports System.Diagnostics.Eventing
+Imports System.Data
 
 
 Public Class LogInForm
     Dim engine = "localhost, 1433"
     Dim db = "payrolldatabase"
-    Dim con As New SqlConnection("Data Source=" + engine + ";Initial Catalog=" + db + ";Integrated Security=true")
-    Dim cmd As New SqlCommand
-    Dim sd As New SqlDataAdapter
-    Dim dt As New DataTable
-    Private loginAttempts As Integer = 0
-    Dim str As String
-    Dim fullName As String
-    Dim email As String
-    Dim employeeUN As String
-    Dim employeePW As String
-    Dim employeeID As String
-    Dim attempt As Integer
 
 
-    Public Sub Button1_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
+    Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
+        Dim con As New SqlConnection("Data Source=" + engine + ";Initial Catalog=" + db + ";Integrated Security=true")
+        Dim cmd As New SqlCommand("SELECT usrname,pw,role FROM Employee_Info WHERE usrname ='" & tbUsername.Text & "' AND pw='" & tbPassword.Text & "' AND role='" & cbRole.Text & "'", con)
+        Dim usrnameParam As New SqlParameter("@usrname", tbUsername.Text)
+        Dim pwParam As New SqlParameter("@pw", tbPassword.Text)
+        Dim roleParam As New SqlParameter("@role", cbRole.Text)
+        Dim sda As SqlDataAdapter = New SqlDataAdapter(cmd)
+        Dim dt As DataTable = New DataTable()
+        sda.Fill(dt)
 
-        If tbUsername.Text = "hradmin" Then
-            HRAdmin.Show()
-        ElseIf tbUsername.Text = "itadmin" Then
-            ITAdmin.Show()
-        ElseIf tbUsername.Text = "employee" Then
-            EmployeeDashboard.Show()
-        ElseIf tbUsername.Text = "accountingadmin" Then
-            AccountingAdmin.Show()
-        ElseIf tbUsername.Text = "changepassword" Then
-            OneTimeEmployeePasswordChange.Show()
+        cmd.Parameters.Add(usrnameParam)
+        cmd.Parameters.Add(pwParam)
+        cmd.Parameters.Add(roleParam)
 
-        End If
-        Me.Hide()
-
-        Dim usrname As String = tbUsername.Text
-        Dim pw As String = tbPassword.Text
-
-        If con.State = ConnectionState.Open Then con.Close()
-
-        If usrname = "" Or pw = "" Then
-            MessageBox.Show("Username and Password do not match.", "Message...", MessageBoxButtons.OK)
-
-        Else
-            str = "SELECT * FROM Employee_Info WHERE usrname = '" & tbUsername.Text & "' AND pw = '" & tbPassword.Text & "'"
-            con.Open()
-
-            Dim mysC As New SqlCommand(str, con)
-            Dim DR As SqlDataReader
-
-            DR = mysC.ExecuteReader
-
-            If DR.HasRows Then
-
-                While DR.Read
-                    fullName = DR.GetString("employee_name").ToUpper
-                    email = DR.GetString("email")
-                    employeeUN = DR.GetString("usrname")
-                    employeePW = DR.GetString("pw")
-                    employeeID = DR.GetInt32("employee_id")
-
-
-                End While
-
-                EmployeeTimeInTimeOutForm.lblUsername.Text = $"Hi, {fullName}"
-                EmployeeMyAccount.lblFullName.Text = fullName
-                EmployeeMyAccount.lblEmail.Text = email
-                EmployeeMyAccount.lblUsername.Text = employeeUN
-                EmployeeMyAccount.lblPassword.Text = employeePW
-
-
-                MessageBox.Show("Welcome to the System!", "Message...", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                EmployeeDashboard.Show()
+        cmd.Connection.Open()
+        Dim reader As SqlDataReader = cmd.ExecuteReader()
+        If (dt.Rows.Count > 0) Then
+            MessageBox.Show("You are Logged In as " + dt.Rows(0)(2) + "!")
+            If (cbRole.SelectedIndex = 0) Then
+                Dim IT As New ITAdmin
+                IT.Show()
                 Me.Hide()
-
-                con.Close()
-
-                tbPassword.Text = ""
-                tbUsername.Text = ""
-
-
             Else
-                MessageBox.Show("Login failed. Username and Password do not match.", "Message...", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Me.Show()
-
-                attempt += 1
-                If attempt = 3 Then
-                    tbUsername.Enabled = False
-                    tbPassword.Enabled = False
-                    btnLogin.Enabled = False
-                    MessageBox.Show("3 attempts has been used. Please contact the IT Admin to unlock.")
-                    Me.Show()
-                End If
-
+                Dim Employee As New EmployeeDashboard
+                Employee.Show()
+                Me.Hide()
             End If
+        Else
+
+            MessageBox.Show("Username and Password are not found.")
+            tbUsername.Clear()
+            tbPassword.Clear()
+            tbUsername.Focus()
+
+
         End If
-
-
-
-
+        cmd.Connection.Close()
 
     End Sub
-
 End Class

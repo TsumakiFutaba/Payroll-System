@@ -265,7 +265,7 @@ Partial Class ITCreateAccount
         cbPosition.BackColor = SystemColors.ScrollBar
         cbPosition.DropDownStyle = ComboBoxStyle.DropDownList
         cbPosition.FormattingEnabled = True
-        cbPosition.Items.AddRange(New Object() {"Project Manager", "Front-End Developer", "Back-End Developer", "Data Analyst", "IT Admin", "HR Admin", "Accounting Admin"})
+        cbPosition.Items.AddRange(New Object() {"IT Admin", "HR Admin", "Accounting Admin", "User"})
         cbPosition.Location = New Point(87, 139)
         cbPosition.Name = "cbPosition"
         cbPosition.Size = New Size(873, 23)

@@ -25,6 +25,8 @@ Partial Class LogInForm
         Panel1 = New Panel()
         pbLogo = New PictureBox()
         Panel2 = New Panel()
+        lbRole = New Label()
+        cbRole = New ComboBox()
         Button1 = New Button()
         btnLogin = New Button()
         lblPassword = New Label()
@@ -60,6 +62,8 @@ Partial Class LogInForm
         ' Panel2
         ' 
         Panel2.BackgroundImage = My.Resources.Resources.Untitled_design__1_
+        Panel2.Controls.Add(lbRole)
+        Panel2.Controls.Add(cbRole)
         Panel2.Controls.Add(Button1)
         Panel2.Controls.Add(btnLogin)
         Panel2.Controls.Add(lblPassword)
@@ -74,6 +78,29 @@ Partial Class LogInForm
         Panel2.Size = New Size(389, 353)
         Panel2.TabIndex = 1
         ' 
+        ' lbRole
+        ' 
+        lbRole.AutoSize = True
+        lbRole.BackColor = Color.Transparent
+        lbRole.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        lbRole.ForeColor = SystemColors.ButtonHighlight
+        lbRole.Location = New Point(31, 244)
+        lbRole.Name = "lbRole"
+        lbRole.Size = New Size(38, 19)
+        lbRole.TabIndex = 9
+        lbRole.Text = "Role:"
+        ' 
+        ' cbRole
+        ' 
+        cbRole.BackColor = SystemColors.Window
+        cbRole.ForeColor = SystemColors.WindowFrame
+        cbRole.FormattingEnabled = True
+        cbRole.Items.AddRange(New Object() {"IT Admin", "HR Admin", "Accounting Admin", "User"})
+        cbRole.Location = New Point(74, 242)
+        cbRole.Name = "cbRole"
+        cbRole.Size = New Size(126, 23)
+        cbRole.TabIndex = 8
+        ' 
         ' Button1
         ' 
         Button1.BackColor = Color.Transparent
@@ -81,7 +108,7 @@ Partial Class LogInForm
         Button1.FlatStyle = FlatStyle.Flat
         Button1.Font = New Font("Segoe UI", 10F, FontStyle.Underline, GraphicsUnit.Point)
         Button1.ForeColor = Color.FromArgb(CByte(203), CByte(203), CByte(203))
-        Button1.Location = New Point(215, 239)
+        Button1.Location = New Point(223, 239)
         Button1.Name = "Button1"
         Button1.Size = New Size(137, 32)
         Button1.TabIndex = 7
@@ -201,4 +228,6 @@ Partial Class LogInForm
     Friend WithEvents tbPassword As TextBox
     Friend WithEvents btnLogin As Button
     Friend WithEvents Button1 As Button
+    Friend WithEvents lbRole As Label
+    Friend WithEvents cbRole As ComboBox
 End Class
