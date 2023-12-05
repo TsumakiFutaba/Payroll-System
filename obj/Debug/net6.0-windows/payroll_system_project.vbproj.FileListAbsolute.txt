@@ -422,7 +422,6 @@ C:\Users\VM-Win10\Documents\vb dotnet\Payroll-System\obj\Debug\net6.0-windows\pa
 C:\Users\VM-Win10\Documents\vb dotnet\Payroll-System\obj\Debug\net6.0-windows\payroll_system_project.EmployeeMyAccount.resources
 C:\Users\VM-Win10\Documents\vb dotnet\Payroll-System\obj\Debug\net6.0-windows\payroll_system_project.EmployeeMyAttendance.resources
 C:\Users\VM-Win10\Documents\vb dotnet\Payroll-System\obj\Debug\net6.0-windows\payroll_system_project.EmployeeTimeInTimeOutForm.resources
-C:\Users\VM-Win10\Documents\vb dotnet\Payroll-System\obj\Debug\net6.0-windows\payroll_system_project.Form1.resources
 C:\Users\VM-Win10\Documents\vb dotnet\Payroll-System\obj\Debug\net6.0-windows\payroll_system_project.HRAdmin.resources
 C:\Users\VM-Win10\Documents\vb dotnet\Payroll-System\obj\Debug\net6.0-windows\payroll_system_project.HRAttendanceForm.resources
 C:\Users\VM-Win10\Documents\vb dotnet\Payroll-System\obj\Debug\net6.0-windows\payroll_system_project.HRDeductions.resources
@@ -529,3 +528,4 @@ C:\Users\user\source\repos\Payroll-System\obj\Debug\net6.0-windows\payroll_syste
 C:\Users\user\source\repos\Payroll-System\obj\Debug\net6.0-windows\payroll_system_project.genruntimeconfig.cache
 C:\Users\user\source\repos\Payroll-System\obj\Debug\net6.0-windows\ref\payroll_system_project.dll
 C:\Users\user\source\repos\Payroll-System\obj\Debug\net6.0-windows\payroll_system_project.ForgetPassword.resources
+C:\Users\VM-Win10\Documents\vb dotnet\Payroll-System\obj\Debug\net6.0-windows\payroll_system_project.ForgetPassword.resources
