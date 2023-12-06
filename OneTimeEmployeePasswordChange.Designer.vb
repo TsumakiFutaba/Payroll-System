@@ -27,16 +27,16 @@ Partial Class OneTimeEmployeePasswordChange
         Panel2 = New Panel()
         TextBox3 = New TextBox()
         Label5 = New Label()
-        Button1 = New Button()
+        btnConfirm = New Button()
         Label4 = New Label()
-        CheckBox5 = New CheckBox()
-        CheckBox4 = New CheckBox()
-        CheckBox3 = New CheckBox()
-        CheckBox2 = New CheckBox()
-        CheckBox1 = New CheckBox()
-        TextBox2 = New TextBox()
+        chbCharactersMinimum = New CheckBox()
+        chbOneNumberCharacter = New CheckBox()
+        chbOneSpecialCharacter = New CheckBox()
+        chbOneUppercaseCharacter = New CheckBox()
+        chbOneLowercaseCharacter = New CheckBox()
+        tbNewPassword = New TextBox()
         Label3 = New Label()
-        TextBox1 = New TextBox()
+        tbUsername = New TextBox()
         Label2 = New Label()
         Panel1.SuspendLayout()
         Panel2.SuspendLayout()
@@ -68,16 +68,16 @@ Partial Class OneTimeEmployeePasswordChange
         Panel2.BackColor = SystemColors.ControlLightLight
         Panel2.Controls.Add(TextBox3)
         Panel2.Controls.Add(Label5)
-        Panel2.Controls.Add(Button1)
+        Panel2.Controls.Add(btnConfirm)
         Panel2.Controls.Add(Label4)
-        Panel2.Controls.Add(CheckBox5)
-        Panel2.Controls.Add(CheckBox4)
-        Panel2.Controls.Add(CheckBox3)
-        Panel2.Controls.Add(CheckBox2)
-        Panel2.Controls.Add(CheckBox1)
-        Panel2.Controls.Add(TextBox2)
+        Panel2.Controls.Add(chbCharactersMinimum)
+        Panel2.Controls.Add(chbOneNumberCharacter)
+        Panel2.Controls.Add(chbOneSpecialCharacter)
+        Panel2.Controls.Add(chbOneUppercaseCharacter)
+        Panel2.Controls.Add(chbOneLowercaseCharacter)
+        Panel2.Controls.Add(tbNewPassword)
         Panel2.Controls.Add(Label3)
-        Panel2.Controls.Add(TextBox1)
+        Panel2.Controls.Add(tbUsername)
         Panel2.Controls.Add(Label2)
         Panel2.Dock = DockStyle.Fill
         Panel2.Location = New Point(0, 74)
@@ -103,18 +103,18 @@ Partial Class OneTimeEmployeePasswordChange
         Label5.TabIndex = 11
         Label5.Text = "Where did your parents meet? (Secret Password)"
         ' 
-        ' Button1
+        ' btnConfirm
         ' 
-        Button1.BackColor = Color.FromArgb(CByte(70), CByte(80), CByte(90))
-        Button1.FlatAppearance.BorderSize = 0
-        Button1.FlatStyle = FlatStyle.Flat
-        Button1.ForeColor = Color.FromArgb(CByte(203), CByte(203), CByte(203))
-        Button1.Location = New Point(38, 320)
-        Button1.Name = "Button1"
-        Button1.Size = New Size(404, 36)
-        Button1.TabIndex = 10
-        Button1.Text = "Confirm"
-        Button1.UseVisualStyleBackColor = False
+        btnConfirm.BackColor = Color.FromArgb(CByte(70), CByte(80), CByte(90))
+        btnConfirm.FlatAppearance.BorderSize = 0
+        btnConfirm.FlatStyle = FlatStyle.Flat
+        btnConfirm.ForeColor = Color.FromArgb(CByte(203), CByte(203), CByte(203))
+        btnConfirm.Location = New Point(38, 320)
+        btnConfirm.Name = "btnConfirm"
+        btnConfirm.Size = New Size(404, 36)
+        btnConfirm.TabIndex = 10
+        btnConfirm.Text = "Confirm"
+        btnConfirm.UseVisualStyleBackColor = False
         ' 
         ' Label4
         ' 
@@ -126,69 +126,74 @@ Partial Class OneTimeEmployeePasswordChange
         Label4.TabIndex = 9
         Label4.Text = "Your new password should contain: "
         ' 
-        ' CheckBox5
+        ' chbCharactersMinimum
         ' 
-        CheckBox5.AutoSize = True
-        CheckBox5.ForeColor = SystemColors.ControlDark
-        CheckBox5.Location = New Point(233, 163)
-        CheckBox5.Name = "CheckBox5"
-        CheckBox5.Size = New Size(145, 19)
-        CheckBox5.TabIndex = 8
-        CheckBox5.Text = "8 characters minimum"
-        CheckBox5.UseVisualStyleBackColor = True
+        chbCharactersMinimum.AutoSize = True
+        chbCharactersMinimum.Enabled = False
+        chbCharactersMinimum.ForeColor = SystemColors.ControlDark
+        chbCharactersMinimum.Location = New Point(233, 163)
+        chbCharactersMinimum.Name = "chbCharactersMinimum"
+        chbCharactersMinimum.Size = New Size(145, 19)
+        chbCharactersMinimum.TabIndex = 8
+        chbCharactersMinimum.Text = "8 characters minimum"
+        chbCharactersMinimum.UseVisualStyleBackColor = True
         ' 
-        ' CheckBox4
+        ' chbOneNumberCharacter
         ' 
-        CheckBox4.AutoSize = True
-        CheckBox4.Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point)
-        CheckBox4.ForeColor = SystemColors.ControlDark
-        CheckBox4.Location = New Point(233, 138)
-        CheckBox4.Name = "CheckBox4"
-        CheckBox4.Size = New Size(143, 19)
-        CheckBox4.TabIndex = 7
-        CheckBox4.Text = "one number character"
-        CheckBox4.UseVisualStyleBackColor = True
+        chbOneNumberCharacter.AutoSize = True
+        chbOneNumberCharacter.Enabled = False
+        chbOneNumberCharacter.Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point)
+        chbOneNumberCharacter.ForeColor = SystemColors.ControlDark
+        chbOneNumberCharacter.Location = New Point(233, 138)
+        chbOneNumberCharacter.Name = "chbOneNumberCharacter"
+        chbOneNumberCharacter.Size = New Size(143, 19)
+        chbOneNumberCharacter.TabIndex = 4
+        chbOneNumberCharacter.Text = "one number character"
+        chbOneNumberCharacter.UseVisualStyleBackColor = True
         ' 
-        ' CheckBox3
+        ' chbOneSpecialCharacter
         ' 
-        CheckBox3.AutoSize = True
-        CheckBox3.ForeColor = SystemColors.ControlDark
-        CheckBox3.Location = New Point(38, 188)
-        CheckBox3.Name = "CheckBox3"
-        CheckBox3.Size = New Size(137, 19)
-        CheckBox3.TabIndex = 6
-        CheckBox3.Text = "one special character"
-        CheckBox3.UseVisualStyleBackColor = True
+        chbOneSpecialCharacter.AutoSize = True
+        chbOneSpecialCharacter.Enabled = False
+        chbOneSpecialCharacter.ForeColor = SystemColors.ControlDark
+        chbOneSpecialCharacter.Location = New Point(38, 188)
+        chbOneSpecialCharacter.Name = "chbOneSpecialCharacter"
+        chbOneSpecialCharacter.Size = New Size(137, 19)
+        chbOneSpecialCharacter.TabIndex = 6
+        chbOneSpecialCharacter.Text = "one special character"
+        chbOneSpecialCharacter.UseVisualStyleBackColor = True
         ' 
-        ' CheckBox2
+        ' chbOneUppercaseCharacter
         ' 
-        CheckBox2.AutoSize = True
-        CheckBox2.ForeColor = SystemColors.ControlDark
-        CheckBox2.Location = New Point(38, 163)
-        CheckBox2.Name = "CheckBox2"
-        CheckBox2.Size = New Size(155, 19)
-        CheckBox2.TabIndex = 5
-        CheckBox2.Text = "one uppercase character"
-        CheckBox2.UseVisualStyleBackColor = True
+        chbOneUppercaseCharacter.AutoSize = True
+        chbOneUppercaseCharacter.Enabled = False
+        chbOneUppercaseCharacter.ForeColor = SystemColors.ControlDark
+        chbOneUppercaseCharacter.Location = New Point(38, 163)
+        chbOneUppercaseCharacter.Name = "chbOneUppercaseCharacter"
+        chbOneUppercaseCharacter.Size = New Size(155, 19)
+        chbOneUppercaseCharacter.TabIndex = 5
+        chbOneUppercaseCharacter.Text = "one uppercase character"
+        chbOneUppercaseCharacter.UseVisualStyleBackColor = True
         ' 
-        ' CheckBox1
+        ' chbOneLowercaseCharacter
         ' 
-        CheckBox1.AutoSize = True
-        CheckBox1.ForeColor = SystemColors.ControlDark
-        CheckBox1.Location = New Point(38, 138)
-        CheckBox1.Name = "CheckBox1"
-        CheckBox1.Size = New Size(153, 19)
-        CheckBox1.TabIndex = 4
-        CheckBox1.Text = "one lowercase character"
-        CheckBox1.UseVisualStyleBackColor = True
+        chbOneLowercaseCharacter.AutoSize = True
+        chbOneLowercaseCharacter.Enabled = False
+        chbOneLowercaseCharacter.ForeColor = SystemColors.ControlDark
+        chbOneLowercaseCharacter.Location = New Point(38, 138)
+        chbOneLowercaseCharacter.Name = "chbOneLowercaseCharacter"
+        chbOneLowercaseCharacter.Size = New Size(153, 19)
+        chbOneLowercaseCharacter.TabIndex = 4
+        chbOneLowercaseCharacter.Text = "one lowercase character"
+        chbOneLowercaseCharacter.UseVisualStyleBackColor = True
         ' 
-        ' TextBox2
+        ' tbNewPassword
         ' 
-        TextBox2.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        TextBox2.Location = New Point(137, 62)
-        TextBox2.Name = "TextBox2"
-        TextBox2.Size = New Size(305, 29)
-        TextBox2.TabIndex = 3
+        tbNewPassword.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        tbNewPassword.Location = New Point(137, 62)
+        tbNewPassword.Name = "tbNewPassword"
+        tbNewPassword.Size = New Size(305, 29)
+        tbNewPassword.TabIndex = 3
         ' 
         ' Label3
         ' 
@@ -200,13 +205,13 @@ Partial Class OneTimeEmployeePasswordChange
         Label3.TabIndex = 2
         Label3.Text = "New password: "
         ' 
-        ' TextBox1
+        ' tbUsername
         ' 
-        TextBox1.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        TextBox1.Location = New Point(137, 13)
-        TextBox1.Name = "TextBox1"
-        TextBox1.Size = New Size(305, 29)
-        TextBox1.TabIndex = 1
+        tbUsername.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        tbUsername.Location = New Point(137, 13)
+        tbUsername.Name = "tbUsername"
+        tbUsername.Size = New Size(305, 29)
+        tbUsername.TabIndex = 1
         ' 
         ' Label2
         ' 
@@ -239,17 +244,17 @@ Partial Class OneTimeEmployeePasswordChange
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Label1 As Label
-    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents tbNewPassword As TextBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents tbUsername As TextBox
     Friend WithEvents Label2 As Label
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnConfirm As Button
     Friend WithEvents Label4 As Label
-    Friend WithEvents CheckBox5 As CheckBox
-    Friend WithEvents CheckBox4 As CheckBox
-    Friend WithEvents CheckBox3 As CheckBox
-    Friend WithEvents CheckBox2 As CheckBox
-    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents chbCharactersMinimum As CheckBox
+    Friend WithEvents chbOneNumberCharacter As CheckBox
+    Friend WithEvents chbOneSpecialCharacter As CheckBox
+    Friend WithEvents chbOneUppercaseCharacter As CheckBox
+    Friend WithEvents chbOneLowercaseCharacter As CheckBox
     Friend WithEvents TextBox3 As TextBox
     Friend WithEvents Label5 As Label
 End Class

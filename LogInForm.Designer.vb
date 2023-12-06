@@ -27,7 +27,7 @@ Partial Class LogInForm
         Panel2 = New Panel()
         lbRole = New Label()
         cbRole = New ComboBox()
-        Button1 = New Button()
+        btnForgotpw = New Button()
         btnLogin = New Button()
         lblPassword = New Label()
         tbPassword = New TextBox()
@@ -64,7 +64,7 @@ Partial Class LogInForm
         Panel2.BackgroundImage = My.Resources.Resources.Untitled_design__1_
         Panel2.Controls.Add(lbRole)
         Panel2.Controls.Add(cbRole)
-        Panel2.Controls.Add(Button1)
+        Panel2.Controls.Add(btnForgotpw)
         Panel2.Controls.Add(btnLogin)
         Panel2.Controls.Add(lblPassword)
         Panel2.Controls.Add(tbPassword)
@@ -101,20 +101,20 @@ Partial Class LogInForm
         cbRole.Size = New Size(126, 23)
         cbRole.TabIndex = 8
         ' 
-        ' Button1
+        ' btnForgotpw
         ' 
-        Button1.BackColor = Color.Transparent
-        Button1.FlatAppearance.BorderSize = 0
-        Button1.FlatStyle = FlatStyle.Flat
-        Button1.Font = New Font("Segoe UI", 10F, FontStyle.Underline, GraphicsUnit.Point)
-        Button1.ForeColor = Color.FromArgb(CByte(203), CByte(203), CByte(203))
-        Button1.Location = New Point(223, 239)
-        Button1.Name = "Button1"
-        Button1.Size = New Size(137, 32)
-        Button1.TabIndex = 7
-        Button1.Text = "Forgot password?"
-        Button1.TextAlign = ContentAlignment.MiddleRight
-        Button1.UseVisualStyleBackColor = False
+        btnForgotpw.BackColor = Color.Transparent
+        btnForgotpw.FlatAppearance.BorderSize = 0
+        btnForgotpw.FlatStyle = FlatStyle.Flat
+        btnForgotpw.Font = New Font("Segoe UI", 10F, FontStyle.Underline, GraphicsUnit.Point)
+        btnForgotpw.ForeColor = Color.FromArgb(CByte(203), CByte(203), CByte(203))
+        btnForgotpw.Location = New Point(223, 239)
+        btnForgotpw.Name = "btnForgotpw"
+        btnForgotpw.Size = New Size(137, 32)
+        btnForgotpw.TabIndex = 7
+        btnForgotpw.Text = "Forgot password?"
+        btnForgotpw.TextAlign = ContentAlignment.MiddleRight
+        btnForgotpw.UseVisualStyleBackColor = False
         ' 
         ' btnLogin
         ' 
@@ -227,7 +227,7 @@ Partial Class LogInForm
     Friend WithEvents lblPassword As Label
     Friend WithEvents tbPassword As TextBox
     Friend WithEvents btnLogin As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnForgotpw As Button
     Friend WithEvents lbRole As Label
     Friend WithEvents cbRole As ComboBox
 End Class
