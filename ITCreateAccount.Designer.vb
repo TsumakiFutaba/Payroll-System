@@ -53,6 +53,8 @@ Partial Class ITCreateAccount
         lblAge = New Label()
         tbName = New TextBox()
         lblName = New Label()
+        lbSecretPW = New Label()
+        TextBox1 = New TextBox()
         PanelTop.SuspendLayout()
         Panel3.SuspendLayout()
         Panel2.SuspendLayout()
@@ -113,6 +115,8 @@ Partial Class ITCreateAccount
         ' 
         ' Panel4
         ' 
+        Panel4.Controls.Add(TextBox1)
+        Panel4.Controls.Add(lbSecretPW)
         Panel4.Controls.Add(cbGender)
         Panel4.Controls.Add(DateTimePickDOB)
         Panel4.Controls.Add(tbID)
@@ -404,6 +408,26 @@ Partial Class ITCreateAccount
         lblName.TabIndex = 0
         lblName.Text = "Name:"
         ' 
+        ' lbSecretPW
+        ' 
+        lbSecretPW.AutoSize = True
+        lbSecretPW.Font = New Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point)
+        lbSecretPW.ForeColor = SystemColors.ControlDarkDark
+        lbSecretPW.Location = New Point(29, 171)
+        lbSecretPW.Name = "lbSecretPW"
+        lbSecretPW.Size = New Size(317, 17)
+        lbSecretPW.TabIndex = 28
+        lbSecretPW.Text = "Where did your parents meet? (For Secret Password)"
+        ' 
+        ' TextBox1
+        ' 
+        TextBox1.BackColor = SystemColors.ScrollBar
+        TextBox1.BorderStyle = BorderStyle.None
+        TextBox1.Location = New Point(349, 173)
+        TextBox1.Name = "TextBox1"
+        TextBox1.Size = New Size(320, 16)
+        TextBox1.TabIndex = 29
+        ' 
         ' ITCreateAccount
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
@@ -456,4 +480,6 @@ Partial Class ITCreateAccount
     Friend WithEvents Label5 As Label
     Friend WithEvents DateTimePickDOB As DateTimePicker
     Friend WithEvents cbGender As ComboBox
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents lbSecretPW As Label
 End Class
