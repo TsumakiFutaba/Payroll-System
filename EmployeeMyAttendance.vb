@@ -10,7 +10,7 @@ Public Class EmployeeMyAttendance
     Public Sub FetchData()
         Dim columnsToFetch As String = "USERNAME, inTime, inStatus, inDate, outTime, outStatus, outDate"
 
-        Dim query As String = $"SELECT {columnsToFetch} FROM Employee_Attendances"
+        Dim query As String = $"SELECT {columnsToFetch} FROM Employee_Attendances WHERE USERNAME='{EmployeeTimeInTimeOutForm.lblUsername.Text}'"
 
         Dim dataTable As New DataTable
 

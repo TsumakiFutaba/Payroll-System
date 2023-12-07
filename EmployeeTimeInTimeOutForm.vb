@@ -12,7 +12,7 @@ Public Class EmployeeTimeInTimeOutForm
 
     Private Sub btnTimeInOut_Click(sender As Object, e As EventArgs) Handles btnTimeIn.Click
 
-        Dim USERNAME As String = lblHi.Text
+        Dim USERNAME As String = lblUsername.Text
         Dim inTime As String = LabelTime.Text
         Dim inDate As String = LabelDate.Text
         Dim inStatus As String = "Time In"
@@ -60,7 +60,7 @@ Public Class EmployeeTimeInTimeOutForm
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnTimeOut.Click
 
-        Dim USERNAME As String = lblHi.Text
+        Dim USERNAME As String = lblUsername.Text
         Dim inDate As String = LabelDate.Text
         Dim outTime As String = LabelTime.Text
         Dim outDate As String = LabelDate.Text
@@ -114,20 +114,21 @@ Public Class EmployeeTimeInTimeOutForm
 
     Private Sub UpdateUserNameLabel()
         Dim connectionString As String = ("Data Source=" + engine + ";Initial Catalog=" + db + ";Integrated Security=true")
-        Dim username As String = "usrname"
+        Dim username As String = LogInForm.tbUsername.Text
 
         Try
             Using con As New SqlConnection(connectionString)
                 con.Open()
 
-                Dim query As String = "SELECT employee_name FROM [Employee_Info] WHERE usrname = @usrname"
+                Dim query As String = "SELECT employee_name FROM Employee_Info WHERE usrname = @usrname"
                 Using cmd As New SqlCommand(query, con)
                     cmd.Parameters.AddWithValue("@usrname", username)
                     Dim result As Object = cmd.ExecuteScalar()
                     If result IsNot Nothing Then
-                        lblHi.Text = "Welcome, " & result.ToString()
+                        lblUsername.Text = result.ToString
                     Else
-                        lblHi.Text = "User not found"
+                        lblHi.Hide()
+                        lblUsername.Text = "User not found"
                     End If
                 End Using
             End Using
