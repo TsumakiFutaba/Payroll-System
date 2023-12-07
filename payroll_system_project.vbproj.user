@@ -16,6 +16,9 @@
     <Compile Update="EmployeeMyAccount.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="EmployeeMyAttendance.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="ForgetPassword.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -23,9 +26,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="HRDeductions.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="EmployeeMyAttendance.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="EmployeeDashboard.vb">

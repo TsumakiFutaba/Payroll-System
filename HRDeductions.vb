@@ -1,15 +1,17 @@
 ﻿Imports System.Data.SqlClient
 
 Public Class HRDeductions
+    Dim engine = "localhost, 1433"
+    Dim db = "payrolldatabase"
     Public Sub FetchData()
-        Dim columnsToFetch As String = "Name, SSS, Philhealth, PagIbig"
+        Dim columnsToFetch As String = "employee_name, sss, philhealth, pagibig"
 
         Dim query As String = $"SELECT {columnsToFetch} FROM Employee_Info"
 
         Dim dataTable As New DataTable
 
 
-        Using con As New SqlConnection("Data Source=DESKTOP-V5VR7RP\SQLEXPRESS;Initial Catalog=payrolldatabase;Integrated Security=true")
+        Using con As New SqlConnection("Data Source=" + engine + ";Initial Catalog=" + db + ";Integrated Security=true")
             con.Open()
             Using adapter As New SqlDataAdapter(query, con)
                 adapter.Fill(dataTable)

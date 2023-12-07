@@ -1,11 +1,12 @@
 ﻿Imports System.Data.SqlClient
 
 Public Class HROverview
-
+    Dim engine = "localhost, 1433"
+    Dim db = "payrolldatabase"
     Public Sub CountEmployees()
         Dim query As String = "SELECT COUNT(*) FROM Employee_Info"
 
-        Using con As New SqlConnection("Data Source=DESKTOP-V5VR7RP\SQLEXPRESS;Initial Catalog=payrolldatabase;Integrated Security=true")
+        Using con As New SqlConnection("Data Source=" + engine + ";Initial Catalog=" + db + ";Integrated Security=true")
             con.Open()
 
             Using cmd As New SqlCommand(query, con)

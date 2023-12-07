@@ -29,11 +29,12 @@ Partial Class EmployeeTimeInTimeOutForm
         btnTimeOut = New Button()
         btnTimeIn = New Button()
         PictureBox1 = New PictureBox()
-        lblUsername = New Label()
+        lblHi = New Label()
         Panel2 = New Panel()
         Panel4 = New Panel()
         Panel3 = New Panel()
         LabelTime = New Label()
+        lblUsername = New Label()
         Panel1.SuspendLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         Panel2.SuspendLayout()
@@ -60,10 +61,11 @@ Partial Class EmployeeTimeInTimeOutForm
         ' Panel1
         ' 
         Panel1.BackColor = Color.WhiteSmoke
+        Panel1.Controls.Add(lblUsername)
         Panel1.Controls.Add(btnTimeOut)
         Panel1.Controls.Add(btnTimeIn)
         Panel1.Controls.Add(PictureBox1)
-        Panel1.Controls.Add(lblUsername)
+        Panel1.Controls.Add(lblHi)
         Panel1.Dock = DockStyle.Fill
         Panel1.Location = New Point(0, 0)
         Panel1.Name = "Panel1"
@@ -110,17 +112,17 @@ Partial Class EmployeeTimeInTimeOutForm
         PictureBox1.TabIndex = 20
         PictureBox1.TabStop = False
         ' 
-        ' lblUsername
+        ' lblHi
         ' 
-        lblUsername.AutoSize = True
-        lblUsername.BackColor = Color.WhiteSmoke
-        lblUsername.Font = New Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point)
-        lblUsername.ForeColor = SystemColors.ControlDarkDark
-        lblUsername.Location = New Point(283, 209)
-        lblUsername.Name = "lblUsername"
-        lblUsername.Size = New Size(224, 45)
-        lblUsername.TabIndex = 19
-        lblUsername.Text = "Hi, John Doe!"
+        lblHi.AutoSize = True
+        lblHi.BackColor = Color.WhiteSmoke
+        lblHi.Font = New Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point)
+        lblHi.ForeColor = SystemColors.ControlDarkDark
+        lblHi.Location = New Point(284, 206)
+        lblHi.Name = "lblHi"
+        lblHi.Size = New Size(63, 45)
+        lblHi.TabIndex = 19
+        lblHi.Text = "Hi,"
         ' 
         ' Panel2
         ' 
@@ -161,6 +163,18 @@ Partial Class EmployeeTimeInTimeOutForm
         LabelTime.TabIndex = 1
         LabelTime.Text = "Date and Time"
         ' 
+        ' lblUsername
+        ' 
+        lblUsername.AutoSize = True
+        lblUsername.BackColor = Color.WhiteSmoke
+        lblUsername.Font = New Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point)
+        lblUsername.ForeColor = SystemColors.ControlDarkDark
+        lblUsername.Location = New Point(340, 206)
+        lblUsername.Name = "lblUsername"
+        lblUsername.Size = New Size(172, 45)
+        lblUsername.TabIndex = 20
+        lblUsername.Text = "John Doe!"
+        ' 
         ' EmployeeTimeInTimeOutForm
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
@@ -193,6 +207,7 @@ Partial Class EmployeeTimeInTimeOutForm
     Friend WithEvents LabelTime As Label
     Friend WithEvents btnTimeIn As Button
     Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents lblUsername As Label
+    Friend WithEvents lblHi As Label
     Friend WithEvents btnTimeOut As Button
+    Friend WithEvents lblUsername As Label
 End Class

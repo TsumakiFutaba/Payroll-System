@@ -22,17 +22,17 @@ Partial Class ITUsers
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As DataGridViewCellStyle = New DataGridViewCellStyle()
         lblOverview = New Label()
         Panel6 = New Panel()
-        DataGridView1 = New DataGridView()
+        dgvUsers = New DataGridView()
         Column1 = New DataGridViewTextBoxColumn()
         Column2 = New DataGridViewTextBoxColumn()
         Column3 = New DataGridViewTextBoxColumn()
         Column4 = New DataGridViewTextBoxColumn()
         Column5 = New DataGridViewButtonColumn()
         Panel6.SuspendLayout()
-        CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
+        CType(dgvUsers, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' lblOverview
@@ -49,33 +49,33 @@ Partial Class ITUsers
         ' Panel6
         ' 
         Panel6.BackColor = SystemColors.ControlLightLight
-        Panel6.Controls.Add(DataGridView1)
+        Panel6.Controls.Add(dgvUsers)
         Panel6.Location = New Point(0, 89)
         Panel6.Name = "Panel6"
         Panel6.Size = New Size(997, 643)
         Panel6.TabIndex = 23
         ' 
-        ' DataGridView1
+        ' dgvUsers
         ' 
-        DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
-        DataGridView1.BackgroundColor = SystemColors.ControlLightLight
-        DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = SystemColors.Control
-        DataGridViewCellStyle1.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point)
-        DataGridViewCellStyle1.ForeColor = SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = DataGridViewTriState.True
-        DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
-        DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridView1.Columns.AddRange(New DataGridViewColumn() {Column1, Column2, Column3, Column4, Column5})
-        DataGridView1.Dock = DockStyle.Fill
-        DataGridView1.Location = New Point(0, 0)
-        DataGridView1.Name = "DataGridView1"
-        DataGridView1.ReadOnly = True
-        DataGridView1.RowTemplate.Height = 25
-        DataGridView1.Size = New Size(997, 643)
-        DataGridView1.TabIndex = 0
+        dgvUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+        dgvUsers.BackgroundColor = SystemColors.ControlLightLight
+        DataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = SystemColors.Control
+        DataGridViewCellStyle2.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point)
+        DataGridViewCellStyle2.ForeColor = SystemColors.WindowText
+        DataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = DataGridViewTriState.True
+        dgvUsers.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        dgvUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        dgvUsers.Columns.AddRange(New DataGridViewColumn() {Column1, Column2, Column3, Column4, Column5})
+        dgvUsers.Dock = DockStyle.Fill
+        dgvUsers.Location = New Point(0, 0)
+        dgvUsers.Name = "dgvUsers"
+        dgvUsers.ReadOnly = True
+        dgvUsers.RowTemplate.Height = 25
+        dgvUsers.Size = New Size(997, 643)
+        dgvUsers.TabIndex = 0
         ' 
         ' Column1
         ' 
@@ -123,14 +123,14 @@ Partial Class ITUsers
         StartPosition = FormStartPosition.CenterScreen
         Text = "ITUsers"
         Panel6.ResumeLayout(False)
-        CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
+        CType(dgvUsers, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
 
     Friend WithEvents lblOverview As Label
     Friend WithEvents Panel6 As Panel
-    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents dgvUsers As DataGridView
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
     Friend WithEvents Column2 As DataGridViewTextBoxColumn
     Friend WithEvents Column3 As DataGridViewTextBoxColumn

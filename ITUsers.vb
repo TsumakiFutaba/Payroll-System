@@ -1,8 +1,6 @@
 ﻿Imports System.Data.SqlClient
 
 Public Class ITUsers
-    'Dim con As New SqlConnection("Data Source=DESKTOP-V5VR7RP\SQLEXPRESS;Initial Catalog=payrolldatabase;Integrated Security=true")
-
     Private Sub ITUsers_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         FetchData()
     End Sub
@@ -23,8 +21,8 @@ Public Class ITUsers
             con.Close()
 
         End Using
-        DataGridView1.Columns.Clear()
-        DataGridView1.DataSource = dataTable
+        dgvUsers.Columns.Clear()
+        dgvUsers.DataSource = dataTable
 
 
     End Sub
