@@ -192,6 +192,7 @@ Partial Class OneTimeEmployeePasswordChange
         tbNewPassword.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
         tbNewPassword.Location = New Point(137, 62)
         tbNewPassword.Name = "tbNewPassword"
+        tbNewPassword.PasswordChar = "*"c
         tbNewPassword.Size = New Size(305, 29)
         tbNewPassword.TabIndex = 3
         ' 

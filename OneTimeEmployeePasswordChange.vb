@@ -1,25 +1,19 @@
 ﻿Imports System.Data.SqlClient
-
-
+Imports payroll_system_project.DatabaseHandler
 
 Public Class OneTimeEmployeePasswordChange
     Dim engine = "localhost, 1433"
     Dim db = "payrolldatabase"
-    Dim con As String = ("Data Source=" + engine + ";Initial Catalog=" + db + ";Integrated Security=true")
+    Dim con As String = ($"Data Source={engine};Initial Catalog={db};Integrated Security=true")
 
     Private Sub btnConfirm_Click(sender As Object, e As EventArgs) Handles btnConfirm.Click
-
+        Dim thisUsername As String = tbUsername.Text
         SearchUsername()
-
         If tbNewPassword.TextLength > 0 Then
             UpdatePassword()
-
         Else
             MessageBox.Show("New Password contains no value. Please input characters.")
         End If
-
-
-
     End Sub
     Public Sub SearchUsername()
         Dim thisUsername As String = tbUsername.Text
@@ -37,36 +31,13 @@ Public Class OneTimeEmployeePasswordChange
                 Using reader As SqlDataReader = cmd.ExecuteReader()
                     If reader.Read() Then
                         Dim username As String = reader("usrname").ToString
-
                     Else
                         MessageBox.Show($"User with username {thisUsername} not found.")
                     End If
                 End Using
             End Using
         End Using
-
-
     End Sub
-    Private Function GetCurrentPasswordFromDatabase(Username As String) As String
-        Dim currentPassword As String = Nothing
-        Dim query As String = "SELECT pw FROM Employee_Info WHERE usrname = @usrname"
-
-        Using connection As New SqlConnection(con)
-            connection.Open()
-
-            Using cmd As New SqlCommand(query, connection)
-                cmd.Parameters.AddWithValue("@usrname", Username)
-
-                Dim reader As SqlDataReader = cmd.ExecuteReader()
-
-                If reader.Read() Then
-                    currentPassword = reader("pw").ToString()
-                End If
-            End Using
-        End Using
-
-        Return currentPassword
-    End Function
 
     Public Sub UpdatePassword()
         Dim newPassword As String = tbNewPassword.Text.Trim()
@@ -102,7 +73,25 @@ Public Class OneTimeEmployeePasswordChange
         End If
     End Sub
 
+    Private Function GetCurrentPasswordFromDatabase(Username As String) As String
+        Dim currentPassword As String = Nothing
+        Dim query As String = "SELECT pw FROM Employee_Info WHERE usrname = @usrname"
 
+        Using connection As New SqlConnection(con)
+            connection.Open()
+
+            Using cmd As New SqlCommand(query, connection)
+                cmd.Parameters.AddWithValue("@usrname", Username)
+
+                Dim reader As SqlDataReader = cmd.ExecuteReader()
+
+                If reader.Read() Then
+                    currentPassword = reader("pw").ToString()
+                End If
+            End Using
+        End Using
+        Return currentPassword
+    End Function
 
     Private Sub newPWChanged(sender As Object, e As EventArgs) Handles tbNewPassword.TextChanged
         Dim containsLowercase As Boolean = False
@@ -112,11 +101,8 @@ Public Class OneTimeEmployeePasswordChange
         Dim containsEightCharacters As Boolean = False
         Dim textInPWTextBox As String = tbNewPassword.Text
 
-
         Dim strikeoutFont As New Font(chbOneLowercaseCharacter.Font, FontStyle.Strikeout)
         Dim NotstrikeoutFont As New Font(chbOneLowercaseCharacter.Font, FontStyle.Strikeout = False)
-
-
 
         For Each letters As Char In textInPWTextBox
             If Char.IsLower(letters) Then
@@ -147,13 +133,10 @@ Public Class OneTimeEmployeePasswordChange
             chbOneLowercaseCharacter.CheckState = CheckState.Checked
             chbOneLowercaseCharacter.Font = strikeoutFont
             Debug.WriteLine("Lowercase character found. Checkbox checked.")
-
         ElseIf Not containsLowercase Then
             chbOneLowercaseCharacter.Checked = False
             chbOneLowercaseCharacter.CheckState = CheckState.Unchecked
             chbOneLowercaseCharacter.Font = NotstrikeoutFont
-
-
         End If
 
         If containsUpperCase Then
@@ -183,7 +166,6 @@ Public Class OneTimeEmployeePasswordChange
             chbCharactersMinimum.Checked = False
             chbCharactersMinimum.CheckState = CheckState.Unchecked
             containsEightCharacters = False
-
         End If
 
         If containsSymbol Then
@@ -195,8 +177,6 @@ Public Class OneTimeEmployeePasswordChange
             chbOneSpecialCharacter.Checked = False
             chbOneSpecialCharacter.CheckState = CheckState.Unchecked
             containsSymbol = False
-
-
         End If
     End Sub
 End Class
