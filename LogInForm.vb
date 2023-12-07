@@ -1,63 +1,43 @@
-﻿Imports System.Data.SqlClient
-Imports System.Data
-
-Public Class LogInForm
-    Dim engine = "localhost, 1433"
-    Dim db = "payrolldatabase"
-
-
+﻿Public Class LogInForm
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
-        Dim con As New SqlConnection($"Data Source={engine};Initial Catalog={db};Integrated Security=true")
-        Dim cmd As New SqlCommand("SELECT usrname,pw,role FROM Employee_Info WHERE usrname ='" & tbUsername.Text & "' AND pw='" & tbPassword.Text & "' AND role='" & cbRole.Text & "'", con)
-        Dim usrnameParam As New SqlParameter("@usrname", tbUsername.Text)
-        Dim pwParam As New SqlParameter("@pw", tbPassword.Text)
-        Dim roleParam As New SqlParameter("@role", cbRole.Text)
-        Dim sda As SqlDataAdapter = New SqlDataAdapter(cmd)
-        Dim dt As DataTable = New DataTable()
-        sda.Fill(dt)
 
-        cmd.Parameters.Add(usrnameParam)
-        cmd.Parameters.Add(pwParam)
-        cmd.Parameters.Add(roleParam)
+        Dim sql_data As Dictionary(Of String, String) = DatabaseHandler.LoginData(tbUsername, tbPassword)
 
-        cmd.Connection.Open()
-        Dim reader As SqlDataReader = cmd.ExecuteReader()
-        If (dt.Rows.Count > 0) Then
-            MessageBox.Show($"You are Logged In as {dt.Rows(0)(2)}!")
-            Select Case cbRole.SelectedIndex
-                Case 0
-                    Dim IT As New ITAdmin
-                    IT.Show()
-                    Me.Hide()
-                Case 1
-                    Dim HR As New HRAdmin
-                    HR.Show()
-                    Me.Hide()
-                Case 2
-                    Dim Accounting As New AccountingAdmin
-                    Accounting.Show()
-                    Me.Hide()
-                Case 3
-                    Dim Employee As New EmployeeDashboard
-                    Employee.Show()
-                    Me.Hide()
-            End Select
-        Else
+        If sql_data.GetValueOrDefault("usrname") = tbUsername.Text And sql_data.GetValueOrDefault("pw") = tbPassword.Text _
+            And sql_data.GetValueOrDefault("role") = cbRole.Text Then
 
-            MessageBox.Show("Username and Password are not found.")
-            tbUsername.Clear()
-            tbPassword.Clear()
-            tbUsername.Focus()
+            MessageBox.Show($"You are Logged In as {sql_data.GetValueOrDefault("role")}!")
 
+            ShowWindow(sql_data.GetValueOrDefault("role"))
 
         End If
-        cmd.Connection.Close()
+
+    End Sub
+
+    Private Sub ShowWindow(role As String)
+
+        If role = "IT Admin" Then
+            ITAdmin.Show()
+        End If
+
+        If role = "HR Admin" Then
+            HRAdmin.Show()
+        End If
+
+        If role = "Accounting Admin" Then
+            AccountingAdmin.Show()
+        End If
+
+        If role = "User" Then
+            EmployeeDashboard.Show()
+        End If
+
+        Me.Hide()
 
     End Sub
 
     Private Sub btnForgotpw_Click(sender As Object, e As EventArgs) Handles btnForgotpw.Click
-        Dim forgotpassword As New OneTimeEmployeePasswordChange
-        forgotpassword.Show()
+        OneTimeEmployeePasswordChange.Show()
         Me.Hide()
     End Sub
 End Class
