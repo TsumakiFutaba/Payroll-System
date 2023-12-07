@@ -1,39 +1,32 @@
 ﻿Public Class LogInForm
+    Private Function ShowWindow(role As String) As Form
+        If role = "IT Admin" Then
+            Return ITAdmin
+        End If
+        If role = "HR Admin" Then
+            Return HRAdmin
+        End If
+        If role = "Accounting Admin" Then
+            Return AccountingAdmin
+        End If
+        Return EmployeeDashboard
+    End Function
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
-
-        Dim sql_data As Dictionary(Of String, String) = DatabaseHandler.LoginData(tbUsername, tbPassword)
-
+        Dim sql_data As Dictionary(Of String, Object)
+        Dim NextWindow As Form
+        sql_data = DatabaseHandler.UserData(tbUsername.Text)
         If sql_data.GetValueOrDefault("usrname") = tbUsername.Text And sql_data.GetValueOrDefault("pw") = tbPassword.Text _
             And sql_data.GetValueOrDefault("role") = cbRole.Text Then
-
             MessageBox.Show($"You are Logged In as {sql_data.GetValueOrDefault("role")}!")
-
-            ShowWindow(sql_data.GetValueOrDefault("role"))
-
+            NextWindow = ShowWindow(sql_data.GetValueOrDefault("role"))
+            NextWindow.Show()
+            Me.Hide()
+        Else
+            MessageBox.Show("HTTP 404: Username and Password are not found.")
+            tbUsername.Clear()
+            tbPassword.Clear()
+            tbUsername.Focus()
         End If
-
-    End Sub
-
-    Private Sub ShowWindow(role As String)
-
-        If role = "IT Admin" Then
-            ITAdmin.Show()
-        End If
-
-        If role = "HR Admin" Then
-            HRAdmin.Show()
-        End If
-
-        If role = "Accounting Admin" Then
-            AccountingAdmin.Show()
-        End If
-
-        If role = "User" Then
-            EmployeeDashboard.Show()
-        End If
-
-        Me.Hide()
-
     End Sub
 
     Private Sub btnForgotpw_Click(sender As Object, e As EventArgs) Handles btnForgotpw.Click
