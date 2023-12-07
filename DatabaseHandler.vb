@@ -4,7 +4,6 @@
 ' to perform SQL executions/transactions (kind of like ORM)
 ' and also simplify the procedure of the program by isolating
 ' the executions/transactions to the actual program logic.
-
 Imports System.Data.SqlClient
 
 Module DatabaseHandler
@@ -22,71 +21,29 @@ Module DatabaseHandler
 
     ' Querying the database for username, password, and role of a user, 
     ' and return it as a set of Key-Value pair
-    Public Function LoginData(usrname As TextBox, pw As TextBox) As Dictionary(Of String, String)
-
-        Dim searched_usr As String
-        Dim searched_pw As String
-        Dim searched_role As String
-        Dim res As New Dictionary(Of String, String)
-        query = "SELECT usrname, pw, role FROM Employee_Info WHERE usrname = @usrname"
-
-        Try
-
-            conn.Open()
-            db_cmd = New SqlCommand(query, conn)
-            db_cmd.Parameters.AddWithValue("@usrname", usrname.Text)
-            db_reader = db_cmd.ExecuteReader()
-
-            If db_reader.Read() Then
-
-                searched_usr = db_reader("usrname").ToString()
-                searched_pw = db_reader("pw").ToString()
-                searched_role = db_reader("role").ToString()
-
-                res.Add("usrname", db_reader("usrname").ToString())
-                res.Add("pw", db_reader("pw").ToString())
-                res.Add("role", db_reader("role").ToString())
-
-            Else
-
-                MessageBox.Show("Username and Password are not found.")
-                usrname.Clear()
-                pw.Clear()
-                usrname.Focus()
-
-            End If
-
-        Catch ex As Exception
-
-            MessageBox.Show($"HTTP 500: Unexpected Error.{vbCrLf}Message:{ex}")
-            Application.Exit()
-
-        Finally
-
-            db_reader.Close()
-            conn.Close()
-
-        End Try
-
-        Return res
-
-    End Function
-
-    ' TODO: Try to analyze further for some optimizations
-    Public Function GetUser(usrname As String) As String
-
-        Dim searchedUser As String = Nothing
-        query = "SELECT usrname FROM Employee_Info WHERE usrname = @usrname"
-
+    Public Function UserData(usrname As String) As Dictionary(Of String, Object)
+        Dim res As New Dictionary(Of String, Object)
+        query = "SELECT * FROM Employee_Info WHERE usrname = @usrname"
         Try
             conn.Open()
             db_cmd = New SqlCommand(query, conn)
             db_cmd.Parameters.AddWithValue("@usrname", usrname)
             db_reader = db_cmd.ExecuteReader()
             If db_reader.Read() Then
-                searchedUser = db_reader("usrname").ToString()
-            Else
-                MessageBox.Show($"HTTP 404: Username '{usrname}' not found.")
+                res.Add("employee_id", db_reader("employee_id"))
+                res.Add("employee_name", db_reader("employee_name"))
+                res.Add("age", db_reader("age"))
+                res.Add("gender", db_reader("gender"))
+                res.Add("bday", db_reader("bday").ToString())
+                res.Add("email", db_reader("email"))
+                res.Add("role", db_reader("role"))
+                res.Add("usrname", db_reader("usrname"))
+                res.Add("pw", db_reader("pw"))
+                res.Add("sss", db_reader("sss"))
+                res.Add("philhealth", db_reader("philhealth"))
+                res.Add("pagibig", db_reader("pagibig"))
+                res.Add("newpw", db_reader("newpw"))
+                res.Add("secretpw", db_reader("secretpw"))
             End If
         Catch ex As Exception
             MessageBox.Show($"HTTP 500: Unexpected Error.{vbCrLf}Message:{ex}")
@@ -95,20 +52,7 @@ Module DatabaseHandler
             db_reader.Close()
             conn.Close()
         End Try
-
-        Return searchedUser
-
+        Return res
     End Function
-
-    ' TODO: Implement the password update logic based on GetUser
-    Public Sub PassUpdate(usrname As TextBox, pw As TextBox)
-
-        Dim searchedUser = GetUser(usrname.Text.Trim())
-
-        If Not String.IsNullOrEmpty(searchedUser) Then
-
-        End If
-
-    End Sub
 
 End Module
