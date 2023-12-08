@@ -25,7 +25,7 @@ Partial Class OneTimeEmployeePasswordChange
         Panel1 = New Panel()
         Label1 = New Label()
         Panel2 = New Panel()
-        TextBox3 = New TextBox()
+        tbSecretPW = New TextBox()
         Label5 = New Label()
         btnConfirm = New Button()
         Label4 = New Label()
@@ -66,7 +66,7 @@ Partial Class OneTimeEmployeePasswordChange
         ' Panel2
         ' 
         Panel2.BackColor = SystemColors.ControlLightLight
-        Panel2.Controls.Add(TextBox3)
+        Panel2.Controls.Add(tbSecretPW)
         Panel2.Controls.Add(Label5)
         Panel2.Controls.Add(btnConfirm)
         Panel2.Controls.Add(Label4)
@@ -85,13 +85,13 @@ Partial Class OneTimeEmployeePasswordChange
         Panel2.Size = New Size(500, 376)
         Panel2.TabIndex = 1
         ' 
-        ' TextBox3
+        ' tbSecretPW
         ' 
-        TextBox3.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
-        TextBox3.Location = New Point(38, 276)
-        TextBox3.Name = "TextBox3"
-        TextBox3.Size = New Size(404, 29)
-        TextBox3.TabIndex = 12
+        tbSecretPW.Font = New Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point)
+        tbSecretPW.Location = New Point(38, 276)
+        tbSecretPW.Name = "tbSecretPW"
+        tbSecretPW.Size = New Size(404, 29)
+        tbSecretPW.TabIndex = 12
         ' 
         ' Label5
         ' 
@@ -256,6 +256,6 @@ Partial Class OneTimeEmployeePasswordChange
     Friend WithEvents chbOneSpecialCharacter As CheckBox
     Friend WithEvents chbOneUppercaseCharacter As CheckBox
     Friend WithEvents chbOneLowercaseCharacter As CheckBox
-    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents tbSecretPW As TextBox
     Friend WithEvents Label5 As Label
 End Class
