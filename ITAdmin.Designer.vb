@@ -22,6 +22,7 @@ Partial Class ITAdmin
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As ComponentModel.ComponentResourceManager = New ComponentModel.ComponentResourceManager(GetType(ITAdmin))
         pnlMain = New Panel()
         pnlTop = New Panel()
         FlowLayoutPanel1 = New FlowLayoutPanel()
@@ -34,6 +35,7 @@ Partial Class ITAdmin
         Button1 = New Button()
         btnLogout = New Button()
         pnlButtons1 = New Panel()
+        btnBackupDatabase = New Button()
         btnDeductions = New Button()
         btnEmployee = New Button()
         btnAttendance = New Button()
@@ -175,6 +177,7 @@ Partial Class ITAdmin
         ' pnlButtons1
         ' 
         pnlButtons1.BackColor = Color.FromArgb(CByte(70), CByte(80), CByte(90))
+        pnlButtons1.Controls.Add(btnBackupDatabase)
         pnlButtons1.Controls.Add(btnDeductions)
         pnlButtons1.Controls.Add(btnEmployee)
         pnlButtons1.Controls.Add(btnAttendance)
@@ -185,6 +188,21 @@ Partial Class ITAdmin
         pnlButtons1.Name = "pnlButtons1"
         pnlButtons1.Size = New Size(203, 404)
         pnlButtons1.TabIndex = 1
+        ' 
+        ' btnBackupDatabase
+        ' 
+        btnBackupDatabase.FlatAppearance.BorderSize = 0
+        btnBackupDatabase.FlatStyle = FlatStyle.Flat
+        btnBackupDatabase.Font = New Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point)
+        btnBackupDatabase.ForeColor = Color.FromArgb(CByte(204), CByte(204), CByte(204))
+        btnBackupDatabase.Image = CType(resources.GetObject("btnBackupDatabase.Image"), Image)
+        btnBackupDatabase.ImageAlign = ContentAlignment.MiddleLeft
+        btnBackupDatabase.Location = New Point(4, 206)
+        btnBackupDatabase.Name = "btnBackupDatabase"
+        btnBackupDatabase.Size = New Size(203, 33)
+        btnBackupDatabase.TabIndex = 6
+        btnBackupDatabase.Text = "Backup Database"
+        btnBackupDatabase.UseVisualStyleBackColor = True
         ' 
         ' btnDeductions
         ' 
@@ -332,4 +350,5 @@ Partial Class ITAdmin
     Friend WithEvents pnlLogo As Panel
     Friend WithEvents pbLogo As PictureBox
     Friend WithEvents Button1 As Button
+    Friend WithEvents btnBackupDatabase As Button
 End Class

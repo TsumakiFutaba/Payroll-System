@@ -36,4 +36,9 @@
     Private Sub btnEmployee_Click(sender As Object, e As EventArgs) Handles btnEmployee.Click
         ShowPanel(ITCreateAccount)
     End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnBackupDatabase.Click
+        BackupDatabase.Show()
+        Me.Hide()
+    End Sub
 End Class
