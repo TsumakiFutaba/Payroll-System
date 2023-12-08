@@ -6,7 +6,7 @@ Public Class BackupDatabase
     Dim dread As SqlDataReader
 
     Private Sub BackupDatabase_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        server("DESKTOP-9FJ16TI\SQLEXPRESS")
+        server("localhost, 1433")
     End Sub
 
     Sub server(ByVal engine As String)
@@ -21,7 +21,7 @@ Public Class BackupDatabase
     End Sub
 
     Sub connection()
-        con = New SqlConnection("Data Source=" & Trim(cbServer.Text) & ";Database=Master;Integrated Security=SSPI")
+        con = New SqlConnection("Data Source=" & Trim(cbServer.Text) & ";Database=Master;Integrated Security=true")
         con.Open()
         cbDatabase.Items.Clear()
         cmd = New SqlCommand("SELECT * FROM sysdatabases", con)
@@ -64,7 +64,7 @@ Public Class BackupDatabase
                 prgbrBackup.Visible = True
                 Dim save As String
                 save = sfdBackup.FileName
-                query("backup database " & cbDatabase.Text & " to disk='" & save & "'")
+                query($"backup database {cbDatabase.Text} to disk='{save}'")
             ElseIf engine = "restore" Then
                 ofdBackup.ShowDialog()
                 TimerBackup.Enabled = True

@@ -50,7 +50,7 @@ Public Class ITCreateAccount
 
     End Sub
 
-    Public Function ClearText()
+    Public Sub ClearText()
         tbName.Text = ""
         tbAge.Text = ""
         cbGender.Text = ""
@@ -61,7 +61,7 @@ Public Class ITCreateAccount
         tbSSS.Text = ""
         tbPhilhealth.Text = ""
         tbPagIbig.Text = ""
-    End Function
+    End Sub
 
     Private Sub Age_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tbAge.KeyPress
         If Asc(e.KeyChar) <> 8 Then

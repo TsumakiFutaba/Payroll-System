@@ -42,7 +42,6 @@ Module DatabaseHandler
                 res.Add("sss", db_reader("sss"))
                 res.Add("philhealth", db_reader("philhealth"))
                 res.Add("pagibig", db_reader("pagibig"))
-                res.Add("newpw", db_reader("newpw"))
                 res.Add("secretpw", db_reader("secretpw"))
             End If
         Catch ex As Exception
@@ -55,4 +54,21 @@ Module DatabaseHandler
         Return res
     End Function
 
+    Public Function UpdatePW(usrname As String, pw As String) As Int32
+        Dim rows As Int32
+        query = "UPDATE Employee_Info SET pw = @newpw WHERE usrname = @usrname"
+        Try
+            conn.Open()
+            db_cmd = New SqlCommand(query, conn)
+            db_cmd.Parameters.AddWithValue("@newpw", pw)
+            db_cmd.Parameters.AddWithValue("@usrname", usrname)
+            rows = db_cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            MessageBox.Show($"HTTP 500: Unexpected Error.{vbCrLf}Message:{ex}")
+            Application.Exit()
+        Finally
+            conn.Close()
+        End Try
+        Return rows
+    End Function
 End Module

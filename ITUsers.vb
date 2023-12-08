@@ -2,6 +2,7 @@
 
 Public Class ITUsers
     Private Sub ITUsers_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Refresh()
         FetchData()
     End Sub
 
@@ -12,8 +13,7 @@ Public Class ITUsers
 
         Dim dataTable As New DataTable
 
-
-        Using con As New SqlConnection("Data Source=DESKTOP-9FJ16TI\SQLEXPRESS;Initial Catalog=payrolldatabase;Integrated Security=true")
+        Using con As New SqlConnection("Data Source=localhost, 1433;Initial Catalog=payrolldatabase;Integrated Security=true")
             con.Open()
             Using adapter As New SqlDataAdapter(query, con)
                 adapter.Fill(dataTable)
