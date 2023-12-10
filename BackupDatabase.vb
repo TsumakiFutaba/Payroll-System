@@ -1,84 +1,56 @@
 ﻿Imports System.Data.SqlClient
 Public Class BackupDatabase
-
-    Dim con, con1 As SqlConnection
-    Dim cmd As SqlCommand
-    Dim dread As SqlDataReader
-
-    Private Sub BackupDatabase_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        server("localhost, 1433")
-    End Sub
-
-    Sub server(ByVal engine As String)
-        con = New SqlConnection("Data Source=" & engine & ";Database=Master;Integrated Security=SSPI;")
-        con.Open()
-        cmd = New SqlCommand("SELECT * FROM sysservers where srvproduct='SQL Server'", con)
-        dread = cmd.ExecuteReader()
-        While dread.Read
-            cbServer.Items.Add(dread(2))
-        End While
-        dread.Close()
-    End Sub
-
-    Sub connection()
-        con = New SqlConnection("Data Source=" & Trim(cbServer.Text) & ";Database=Master;Integrated Security=true")
-        con.Open()
-        cbDatabase.Items.Clear()
-        cmd = New SqlCommand("SELECT * FROM sysdatabases", con)
-        dread = cmd.ExecuteReader()
-        While dread.Read
-            cbDatabase.Items.Add(dread(0))
-        End While
-        dread.Close()
-    End Sub
-
-    Private Sub cbServer_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbServer.SelectedIndexChanged
-        connection()
-    End Sub
-
-    Sub query(ByVal que As String)
-        On Error Resume Next
-        cmd = New SqlCommand(que, con)
-        cmd.ExecuteNonQuery()
-    End Sub
-
-    Private Sub TimerBackup_Tick(sender As Object, e As EventArgs) Handles TimerBackup.Tick
-        If prgbrBackup.Value = 100 Then
-            TimerBackup.Enabled = False
-            prgbrBackup.Visible = False
-            MsgBox("Backup Successfull!")
-        Else
-            prgbrBackup.Value = prgbrBackup.Value + 5
-        End If
-    End Sub
-
-    Sub blank(ByVal engine As String)
-        If cbServer.Text = "" Or cbDatabase.Text = "" Then
-            MsgBox("Server name and database Blank Field")
-            Exit Sub
-        Else
-            If engine = "backup" Then
-                sfdBackup.FileName = cbDatabase.Text
-                sfdBackup.ShowDialog()
-                TimerBackup.Enabled = True
-                prgbrBackup.Visible = True
-                Dim save As String
-                save = sfdBackup.FileName
-                query($"backup database {cbDatabase.Text} to disk='{save}'")
-            ElseIf engine = "restore" Then
-                ofdBackup.ShowDialog()
-                TimerBackup.Enabled = True
-                prgbrBackup.Visible = True
-                query("restore database " & cbDatabase.Text & " FROM disk='" & ofdBackup.FileName & "'")
-            End If
+    Dim engine = "localhost, 1433"
+    Dim db = "payrolldatabase"
+    Dim con As New SqlConnection($"Server={engine};database={db};Integrated Security=true")
+    Private Sub btnBrowse1_Click(sender As Object, e As EventArgs) Handles btnBrowse1.Click
+        Dim dlg As New FolderBrowserDialog()
+        If (dlg.ShowDialog() = Windows.Forms.DialogResult.OK) Then
+            tbLocation1.Text = dlg.SelectedPath
         End If
     End Sub
 
     Private Sub btnBackup_Click(sender As Object, e As EventArgs) Handles btnBackup.Click
-        blank("backup")
+        Dim database As String = con.Database.ToString()
+        If (tbLocation1.Text Is String.Empty) Then
+            MessageBox.Show("Please enter backup file location.")
+        Else
+            Dim str As String = "BACKUP DATABASE [" + database + "] TO DISK ='" + tbLocation1.Text + "\" + "database" + "-" + DateTime.Now.ToString("yyyy-MM-dd--HH-mm-ss") + ".bak'"
+            con.Open()
+            Dim cmd As New SqlCommand(str, con)
+            cmd.ExecuteNonQuery()
+            con.Close()
+            MessageBox.Show("Database Backup successfully done!")
+        End If
+
+    End Sub
+
+    Private Sub btnBrowse2_Click(sender As Object, e As EventArgs) Handles btnBrowse2.Click
+        Dim dlg As OpenFileDialog = New OpenFileDialog()
+        dlg.Filter = "SQL SERVER BACKUP FILE|*.bak"
+        dlg.Title = "Restore database"
+        If (dlg.ShowDialog() = Windows.Forms.DialogResult.OK) Then
+            tbLocation2.Text = dlg.FileName
+        End If
+
     End Sub
 
     Private Sub btnRestore_Click(sender As Object, e As EventArgs) Handles btnRestore.Click
-        blank("restore")
+        Dim database As String = con.Database.ToString()
+        con.Open()
+        Dim str1 As String = String.Format("ALTER DATABASE [" + database + "] SET SINGLE_USER WITH ROLLBACK IMMEDIATE")
+        Dim cmd1 As New SqlCommand(str1, con)
+        cmd.ExecuteNonQuery()
+
+        Dim str2 As String = "USE MASTER RESTORE DATABASE [" + database + "] FROM DISK ='" + tbLocation2.Text + "WITH REPLACE"
+        Dim cmd2 As New SqlCommand(str2, con)
+        cmd.ExecuteNonQuery()
+
+        Dim str3 As String = String.Format("ALTER DATABASE [" + database + "] SET MULTI_USER")
+        Dim cmd3 As New SqlCommand(str3, con)
+        cmd.ExecuteNonQuery()
+
+        MessageBox.Show("Restoration of Database done successfully!")
+        con.Close()
     End Sub
 End Class

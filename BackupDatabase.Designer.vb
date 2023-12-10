@@ -23,60 +23,39 @@ Partial Class BackupDatabase
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         components = New ComponentModel.Container()
-        Label1 = New Label()
-        cbServer = New ComboBox()
-        cbDatabase = New ComboBox()
-        lblData = New Label()
+        lblBackup = New Label()
         panelBackup = New Panel()
         lReports = New Label()
-        prgbrBackup = New ProgressBar()
-        btnBackup = New Button()
-        btnRestore = New Button()
+        btnBrowse1 = New Button()
         TimerBackup = New Timer(components)
         sfdBackup = New SaveFileDialog()
         ofdBackup = New OpenFileDialog()
+        Label1 = New Label()
+        Panel1 = New Panel()
+        tbLocation1 = New TextBox()
+        btnBackup = New Button()
+        Label2 = New Label()
+        Panel2 = New Panel()
+        tbLocation2 = New TextBox()
+        Label3 = New Label()
+        btnRestore = New Button()
+        btnBrowse2 = New Button()
         panelBackup.SuspendLayout()
+        Panel1.SuspendLayout()
+        Panel2.SuspendLayout()
         SuspendLayout()
         ' 
-        ' Label1
+        ' lblBackup
         ' 
-        Label1.AutoSize = True
-        Label1.BackColor = Color.Transparent
-        Label1.Font = New Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point)
-        Label1.ForeColor = SystemColors.ButtonHighlight
-        Label1.Location = New Point(71, 66)
-        Label1.Name = "Label1"
-        Label1.Size = New Size(69, 25)
-        Label1.TabIndex = 0
-        Label1.Text = "Server:"
-        ' 
-        ' cbServer
-        ' 
-        cbServer.FormattingEnabled = True
-        cbServer.Location = New Point(148, 68)
-        cbServer.Name = "cbServer"
-        cbServer.Size = New Size(248, 23)
-        cbServer.TabIndex = 1
-        ' 
-        ' cbDatabase
-        ' 
-        cbDatabase.FormattingEnabled = True
-        cbDatabase.Location = New Point(148, 104)
-        cbDatabase.Name = "cbDatabase"
-        cbDatabase.Size = New Size(248, 23)
-        cbDatabase.TabIndex = 3
-        ' 
-        ' lblData
-        ' 
-        lblData.AutoSize = True
-        lblData.BackColor = Color.Transparent
-        lblData.Font = New Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point)
-        lblData.ForeColor = SystemColors.ButtonHighlight
-        lblData.Location = New Point(46, 104)
-        lblData.Name = "lblData"
-        lblData.Size = New Size(94, 25)
-        lblData.TabIndex = 2
-        lblData.Text = "Database:"
+        lblBackup.AutoSize = True
+        lblBackup.BackColor = Color.Transparent
+        lblBackup.Font = New Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point)
+        lblBackup.ForeColor = SystemColors.ButtonHighlight
+        lblBackup.Location = New Point(12, 54)
+        lblBackup.Name = "lblBackup"
+        lblBackup.Size = New Size(124, 20)
+        lblBackup.TabIndex = 0
+        lblBackup.Text = "Backup Database"
         ' 
         ' panelBackup
         ' 
@@ -84,7 +63,7 @@ Partial Class BackupDatabase
         panelBackup.Controls.Add(lReports)
         panelBackup.Location = New Point(0, 0)
         panelBackup.Name = "panelBackup"
-        panelBackup.Size = New Size(472, 51)
+        panelBackup.Size = New Size(478, 51)
         panelBackup.TabIndex = 4
         ' 
         ' lReports
@@ -98,34 +77,16 @@ Partial Class BackupDatabase
         lReports.TabIndex = 5
         lReports.Text = "Database Backup"
         ' 
-        ' prgbrBackup
+        ' btnBrowse1
         ' 
-        prgbrBackup.Location = New Point(148, 138)
-        prgbrBackup.Name = "prgbrBackup"
-        prgbrBackup.Size = New Size(248, 18)
-        prgbrBackup.TabIndex = 5
-        ' 
-        ' btnBackup
-        ' 
-        btnBackup.Font = New Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point)
-        btnBackup.Location = New Point(147, 165)
-        btnBackup.Name = "btnBackup"
-        btnBackup.Size = New Size(115, 29)
-        btnBackup.TabIndex = 6
-        btnBackup.Text = "Backup"
-        btnBackup.UseVisualStyleBackColor = True
-        ' 
-        ' btnRestore
-        ' 
-        btnRestore.Location = New Point(270, 165)
-        btnRestore.Name = "btnRestore"
-        btnRestore.Size = New Size(126, 29)
-        btnRestore.TabIndex = 7
-        btnRestore.Text = "Restore"
-        btnRestore.UseVisualStyleBackColor = True
-        ' 
-        ' TimerBackup
-        ' 
+        btnBrowse1.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point)
+        btnBrowse1.ForeColor = Color.FromArgb(CByte(70), CByte(80), CByte(90))
+        btnBrowse1.Location = New Point(326, 9)
+        btnBrowse1.Name = "btnBrowse1"
+        btnBrowse1.Size = New Size(92, 27)
+        btnBrowse1.TabIndex = 6
+        btnBrowse1.Text = "Browse"
+        btnBrowse1.UseVisualStyleBackColor = True
         ' 
         ' sfdBackup
         ' 
@@ -135,6 +96,113 @@ Partial Class BackupDatabase
         ' 
         ofdBackup.FileName = "OpenFileDialog1"
         ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.BackColor = Color.FromArgb(CByte(70), CByte(80), CByte(90))
+        Label1.Font = New Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point)
+        Label1.ForeColor = SystemColors.ButtonHighlight
+        Label1.Location = New Point(3, 11)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(69, 20)
+        Label1.TabIndex = 8
+        Label1.Text = "Location:"
+        ' 
+        ' Panel1
+        ' 
+        Panel1.BackColor = Color.FromArgb(CByte(70), CByte(80), CByte(90))
+        Panel1.Controls.Add(tbLocation1)
+        Panel1.Controls.Add(Label1)
+        Panel1.Controls.Add(btnBackup)
+        Panel1.Controls.Add(btnBrowse1)
+        Panel1.Location = New Point(22, 77)
+        Panel1.Name = "Panel1"
+        Panel1.Size = New Size(437, 82)
+        Panel1.TabIndex = 6
+        ' 
+        ' tbLocation1
+        ' 
+        tbLocation1.Location = New Point(86, 11)
+        tbLocation1.Name = "tbLocation1"
+        tbLocation1.Size = New Size(222, 23)
+        tbLocation1.TabIndex = 9
+        ' 
+        ' btnBackup
+        ' 
+        btnBackup.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point)
+        btnBackup.ForeColor = Color.FromArgb(CByte(70), CByte(80), CByte(90))
+        btnBackup.Location = New Point(326, 42)
+        btnBackup.Name = "btnBackup"
+        btnBackup.Size = New Size(92, 27)
+        btnBackup.TabIndex = 7
+        btnBackup.Text = "Backup"
+        btnBackup.UseVisualStyleBackColor = True
+        ' 
+        ' Label2
+        ' 
+        Label2.AutoSize = True
+        Label2.BackColor = Color.Transparent
+        Label2.Font = New Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point)
+        Label2.ForeColor = SystemColors.ButtonHighlight
+        Label2.Location = New Point(12, 200)
+        Label2.Name = "Label2"
+        Label2.Size = New Size(124, 20)
+        Label2.TabIndex = 7
+        Label2.Text = "Backup Database"
+        ' 
+        ' Panel2
+        ' 
+        Panel2.BackColor = Color.FromArgb(CByte(70), CByte(80), CByte(90))
+        Panel2.Controls.Add(tbLocation2)
+        Panel2.Controls.Add(Label3)
+        Panel2.Controls.Add(btnRestore)
+        Panel2.Controls.Add(btnBrowse2)
+        Panel2.Location = New Point(22, 223)
+        Panel2.Name = "Panel2"
+        Panel2.Size = New Size(437, 82)
+        Panel2.TabIndex = 8
+        ' 
+        ' tbLocation2
+        ' 
+        tbLocation2.Location = New Point(86, 11)
+        tbLocation2.Name = "tbLocation2"
+        tbLocation2.Size = New Size(222, 23)
+        tbLocation2.TabIndex = 9
+        ' 
+        ' Label3
+        ' 
+        Label3.AutoSize = True
+        Label3.BackColor = Color.FromArgb(CByte(70), CByte(80), CByte(90))
+        Label3.Font = New Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point)
+        Label3.ForeColor = SystemColors.ButtonHighlight
+        Label3.Location = New Point(3, 11)
+        Label3.Name = "Label3"
+        Label3.Size = New Size(69, 20)
+        Label3.TabIndex = 8
+        Label3.Text = "Location:"
+        ' 
+        ' btnRestore
+        ' 
+        btnRestore.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point)
+        btnRestore.ForeColor = Color.FromArgb(CByte(70), CByte(80), CByte(90))
+        btnRestore.Location = New Point(326, 42)
+        btnRestore.Name = "btnRestore"
+        btnRestore.Size = New Size(92, 27)
+        btnRestore.TabIndex = 7
+        btnRestore.Text = "Restore"
+        btnRestore.UseVisualStyleBackColor = True
+        ' 
+        ' btnBrowse2
+        ' 
+        btnBrowse2.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point)
+        btnBrowse2.ForeColor = Color.FromArgb(CByte(70), CByte(80), CByte(90))
+        btnBrowse2.Location = New Point(326, 9)
+        btnBrowse2.Name = "btnBrowse2"
+        btnBrowse2.Size = New Size(92, 27)
+        btnBrowse2.TabIndex = 6
+        btnBrowse2.Text = "Browse"
+        btnBrowse2.UseVisualStyleBackColor = True
+        ' 
         ' BackupDatabase
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
@@ -142,15 +210,12 @@ Partial Class BackupDatabase
         AutoValidate = AutoValidate.EnablePreventFocusChange
         BackColor = SystemColors.ControlLight
         BackgroundImage = My.Resources.Resources.Untitled_design__1_
-        ClientSize = New Size(471, 226)
-        Controls.Add(btnRestore)
-        Controls.Add(btnBackup)
-        Controls.Add(prgbrBackup)
+        ClientSize = New Size(479, 325)
+        Controls.Add(Label2)
+        Controls.Add(Panel2)
         Controls.Add(panelBackup)
-        Controls.Add(cbDatabase)
-        Controls.Add(lblData)
-        Controls.Add(cbServer)
-        Controls.Add(Label1)
+        Controls.Add(lblBackup)
+        Controls.Add(Panel1)
         FormBorderStyle = FormBorderStyle.None
         MaximizeBox = False
         Name = "BackupDatabase"
@@ -158,20 +223,29 @@ Partial Class BackupDatabase
         Text = "BackupDatabase"
         panelBackup.ResumeLayout(False)
         panelBackup.PerformLayout()
+        Panel1.ResumeLayout(False)
+        Panel1.PerformLayout()
+        Panel2.ResumeLayout(False)
+        Panel2.PerformLayout()
         ResumeLayout(False)
         PerformLayout()
     End Sub
 
-    Friend WithEvents Label1 As Label
-    Friend WithEvents cbServer As ComboBox
-    Friend WithEvents cbDatabase As ComboBox
-    Friend WithEvents lblData As Label
+    Friend WithEvents lblBackup As Label
     Friend WithEvents panelBackup As Panel
     Friend WithEvents lReports As Label
-    Friend WithEvents prgbrBackup As ProgressBar
-    Friend WithEvents btnBackup As Button
-    Friend WithEvents btnRestore As Button
+    Friend WithEvents btnBrowse1 As Button
     Friend WithEvents TimerBackup As Timer
     Friend WithEvents sfdBackup As SaveFileDialog
     Friend WithEvents ofdBackup As OpenFileDialog
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents btnBackup As Button
+    Friend WithEvents tbLocation1 As TextBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents tbLocation2 As TextBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents btnRestore As Button
+    Friend WithEvents btnBrowse2 As Button
 End Class
