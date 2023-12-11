@@ -25,10 +25,10 @@ Partial Class AccountingPayrollAudit
         Dim DataGridViewCellStyle1 As DataGridViewCellStyle = New DataGridViewCellStyle()
         lblOverview = New Label()
         Panel6 = New Panel()
-        DataGridView1 = New DataGridView()
-        Column1 = New DataGridViewTextBoxColumn()
-        Column2 = New DataGridViewTextBoxColumn()
         Column3 = New DataGridViewTextBoxColumn()
+        Column2 = New DataGridViewTextBoxColumn()
+        Column1 = New DataGridViewTextBoxColumn()
+        DataGridView1 = New DataGridView()
         Panel6.SuspendLayout()
         CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
@@ -53,6 +53,24 @@ Partial Class AccountingPayrollAudit
         Panel6.Size = New Size(997, 643)
         Panel6.TabIndex = 20
         ' 
+        ' Column3
+        ' 
+        Column3.HeaderText = "Status"
+        Column3.Name = "Column3"
+        Column3.ReadOnly = True
+        ' 
+        ' Column2
+        ' 
+        Column2.HeaderText = "Total Salaries Payable"
+        Column2.Name = "Column2"
+        Column2.ReadOnly = True
+        ' 
+        ' Column1
+        ' 
+        Column1.HeaderText = "Date"
+        Column1.Name = "Column1"
+        Column1.ReadOnly = True
+        ' 
         ' DataGridView1
         ' 
         DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
@@ -74,24 +92,6 @@ Partial Class AccountingPayrollAudit
         DataGridView1.RowTemplate.Height = 25
         DataGridView1.Size = New Size(997, 643)
         DataGridView1.TabIndex = 0
-        ' 
-        ' Column1
-        ' 
-        Column1.HeaderText = "Date"
-        Column1.Name = "Column1"
-        Column1.ReadOnly = True
-        ' 
-        ' Column2
-        ' 
-        Column2.HeaderText = "Total Salaries Payable"
-        Column2.Name = "Column2"
-        Column2.ReadOnly = True
-        ' 
-        ' Column3
-        ' 
-        Column3.HeaderText = "Status"
-        Column3.Name = "Column3"
-        Column3.ReadOnly = True
         ' 
         ' AccountingPayrollAudit
         ' 

@@ -2,18 +2,8 @@
 Imports payroll_system_project.DatabaseHandler
 
 Public Class OneTimeEmployeePasswordChange
-    'Dim engine = "localhost, 1433"
-    'Dim db = "payrolldatabase"
-    'Dim con As String = ($"Data Source={engine};Initial Catalog={db};Integrated Security=true")
 
     Private Sub btnConfirm_Click(sender As Object, e As EventArgs) Handles btnConfirm.Click
-        'Dim thisUsername As String = tbUsername.Text
-        'SearchUsername()
-        'If tbNewPassword.TextLength > 0 Then
-        '    UpdatePassword()
-        'Else
-        '    MessageBox.Show("New Password contains no value. Please input characters.")
-        'End If
 
         Dim sql_data As Dictionary(Of String, Object) = DatabaseHandler.UserData(tbUsername.Text)
 
@@ -27,38 +17,6 @@ Public Class OneTimeEmployeePasswordChange
     End Sub
 
     Public Sub UpdatePassword(db_usrname As String, db_pw As String, newpw As String)
-        'Dim newPassword As String = tbNewPassword.Text.Trim()
-        'Dim searchedUsername As String = tbUsername.Text.Trim()
-
-        'If Not String.IsNullOrEmpty(searchedUsername) Then
-        '    Dim currentPassword As String = GetCurrentPasswordFromDatabase(searchedUsername)
-
-        '    If currentPassword IsNot Nothing Then
-        '        Dim query As String = "UPDATE Employee_Info SET pw = @newpw WHERE usrname = @usrname"
-
-        '        Using connection As New SqlConnection(con)
-        '            connection.Open()
-
-        '            Using cmd As New SqlCommand(query, connection)
-        '                cmd.Parameters.AddWithValue("@newpw", newPassword)
-        '                cmd.Parameters.AddWithValue("@usrname", searchedUsername)
-
-        '                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
-
-        '                If rowsAffected > 0 Then
-        '                    MessageBox.Show("Update successful.")
-        '                Else
-        '                    MessageBox.Show($"No rows updated for Username: {searchedUsername}")
-        '                End If
-        '            End Using
-        '        End Using
-        '    Else
-        '        MessageBox.Show("Current Username value not found.")
-        '    End If
-        'Else
-        '    MessageBox.Show("Invalid Username. Please enter a valid set of characters.")
-        'End If
-
         If Not String.IsNullOrEmpty(db_usrname) Then
 
             If Not String.IsNullOrEmpty(db_pw) And (
@@ -81,7 +39,7 @@ Public Class OneTimeEmployeePasswordChange
 
             Else
 
-                MessageBox.Show("Current Username value not found.")
+                MessageBox.Show("Please check your credentials.")
 
             End If
 
@@ -91,27 +49,6 @@ Public Class OneTimeEmployeePasswordChange
 
         End If
     End Sub
-
-    'Private Function GetCurrentPasswordFromDatabase(Username As String) As String
-    '    Dim currentPassword As String = Nothing
-    '    Dim query As String = "SELECT pw FROM Employee_Info WHERE usrname = @usrname"
-
-    '    Using connection As New SqlConnection(con)
-    '        connection.Open()
-
-    '        Using cmd As New SqlCommand(query, connection)
-    '            cmd.Parameters.AddWithValue("@usrname", Username)
-
-    '            Dim reader As SqlDataReader = cmd.ExecuteReader()
-
-    '            If reader.Read() Then
-    '                currentPassword = reader("pw").ToString()
-    '            End If
-    '        End Using
-    '    End Using
-    '    Return currentPassword
-    'End Function
-
     Private Sub newPWChanged(sender As Object, e As EventArgs) Handles tbNewPassword.TextChanged
         Dim containsLowercase As Boolean = False
         Dim containsUpperCase As Boolean = False

@@ -21,14 +21,14 @@ Public Class PayrollForm
         Dim USERNAME As String = lblNameValue.Text
         Dim query As String = "SELECT * FROM Employee_Info WHERE employee_id=@employee_id"
         Dim totalQuery As String = "SELECT SUM(totalHours) AS TotalSum FROM Employee_Attendances WHERE USERNAME=@USERNAME"
-        Dim deductionQuery As String = "SELECT (ISNULL(sss, 0) + ISNULL(philhealth, 0) + ISNULL(pagibig, 0)) AS TotalSum FROM Employee_Info WHERE usrname=@USERNAME"
+        Dim deductionQuery As String = "SELECT * FROM Employee_Info (ISNULL(sss, 0) + ISNULL(philhealth, 0) + ISNULL(pagibig, 0)) AS TotalSum FROM Employee_Info WHERE usrname=@usrname"
 
 
-        Using connection As New SqlConnection(conn)
-            connection.Open()
+        Using con As New SqlConnection(conn)
+            con.Open()
 
 
-            Using cmd As New SqlCommand(query, connection)
+            Using cmd As New SqlCommand(query, con)
                 cmd.Parameters.AddWithValue("@employee_id", ID)
 
                 Using reader As SqlDataReader = cmd.ExecuteReader()
@@ -43,8 +43,6 @@ Public Class PayrollForm
                         lblPhilHealthValue.Text = Philhealth
                         lblPagIbigValue.Text = PagIbig
                         lblBasicSalaryValue.Text = BasicHourlyWage
-
-
                     Else
 
                         MessageBox.Show($"User with ID {ID} not found.")
@@ -55,10 +53,10 @@ Public Class PayrollForm
 
 
         'Total Hours
-        Using connection As New SqlConnection(conn)
-            connection.Open()
+        Using con As New SqlConnection(conn)
+            con.Open()
 
-            Using cmd As New SqlCommand(totalQuery, connection)
+            Using cmd As New SqlCommand(totalQuery, con)
                 cmd.Parameters.AddWithValue("@USERNAME", lblNameValue.Text)
 
                 Using reader As SqlDataReader = cmd.ExecuteReader()
@@ -75,10 +73,10 @@ Public Class PayrollForm
         End Using
 
         'Wages
-        Using connection As New SqlConnection(conn)
-            connection.Open()
+        Using con As New SqlConnection(conn)
+            con.Open()
 
-            Using cmd As New SqlCommand(totalQuery, connection)
+            Using cmd As New SqlCommand(totalQuery, con)
                 cmd.Parameters.AddWithValue("@USERNAME", lblNameValue.Text)
 
                 Using reader As SqlDataReader = cmd.ExecuteReader()
@@ -96,11 +94,11 @@ Public Class PayrollForm
         End Using
 
         'Total Deductions
-        Using connection As New SqlConnection(conn)
-            connection.Open()
+        Using con As New SqlConnection(conn)
+            con.Open()
 
-            Using cmd As New SqlCommand(deductionQuery, connection)
-                cmd.Parameters.AddWithValue("@USERNAME", lblNameValue.Text)
+            Using cmd As New SqlCommand(deductionQuery, con)
+                cmd.Parameters.AddWithValue("@usrname", lblNameValue.Text)
 
                 Using reader As SqlDataReader = cmd.ExecuteReader()
                     If reader.Read() Then
@@ -115,19 +113,18 @@ Public Class PayrollForm
             End Using
         End Using
 
-        'Net Wages
-        Using connection As New SqlConnection(conn)
-            connection.Open()
+        Using con As New SqlConnection(conn)
+            con.Open()
 
-            Using cmd As New SqlCommand(deductionQuery, connection)
-                cmd.Parameters.AddWithValue("@USERNAME", lblNameValue.Text)
+            Using cmd As New SqlCommand(deductionQuery, con)
+                cmd.Parameters.AddWithValue("@usrname", lblNameValue.Text)
 
                 Using reader As SqlDataReader = cmd.ExecuteReader()
                     If reader.Read() Then
                         Dim totalSum As Integer = If(reader.IsDBNull(0), 0, reader.GetInt32(0))
                         Dim Wages As Integer = Convert.ToInt32(DGVPayroll.Rows(0).Cells(1).Value)
                         If DGVPayroll.Rows.Count > 0 AndAlso DGVPayroll.Columns.Count > 0 Then
-                            DGVPayroll.Rows(0).Cells(3).Value = Wages - totalSum
+                            DGVPayroll.Rows(0).Cells(3).Value = totalSum - Wages
                         Else
 
                         End If
@@ -135,5 +132,38 @@ Public Class PayrollForm
                 End Using
             End Using
         End Using
+    End Sub
+
+    Private connectionString As String = ($"Data Source={engine};Initial Catalog={db};Integrated Security=true")
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        If DGVPayroll.Rows.Count > 0 Then
+            For Each row As DataGridViewRow In DGVPayroll.Rows
+                If Not row.IsNewRow Then
+                    Dim column2Value As String = row.Cells(1).Value.ToString()
+
+                    InsertIntoDatabase(column2Value)
+                End If
+
+            Next
+            MessageBox.Show("Data saved into the database successfully.")
+        Else
+            MessageBox.Show("No rows in the DataGridView to save.")
+        End If
+    End Sub
+
+    Private Sub InsertIntoDatabase(column2Value As String)
+        Try
+            Using con As New SqlConnection(conn)
+                Dim query As String = "INSERT INTO Employee_Audit @netwages"
+                Using cmd As New SqlCommand(query, con)
+                    cmd.Parameters.AddWithValue("@column2value", column2Value)
+
+                    cmd.ExecuteNonQuery()
+                End Using
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error: " & ex.Message)
+        End Try
     End Sub
 End Class

@@ -25,6 +25,10 @@ Partial Class PayrollForm
         pnlCenter = New Panel()
         pnlDGVPayroll = New Panel()
         DGVPayroll = New DataGridView()
+        Column4 = New DataGridViewTextBoxColumn()
+        Column5 = New DataGridViewTextBoxColumn()
+        Column6 = New DataGridViewTextBoxColumn()
+        Column8 = New DataGridViewTextBoxColumn()
         pnlPayrollInformation = New Panel()
         lblPagIbigValue = New Label()
         lblPhilHealthValue = New Label()
@@ -43,10 +47,7 @@ Partial Class PayrollForm
         lblSalaryScheme = New Label()
         lblPayroll = New Label()
         btnPaySlip = New Button()
-        Column4 = New DataGridViewTextBoxColumn()
-        Column5 = New DataGridViewTextBoxColumn()
-        Column6 = New DataGridViewTextBoxColumn()
-        Column8 = New DataGridViewTextBoxColumn()
+        btnSave = New Button()
         pnlCenter.SuspendLayout()
         pnlDGVPayroll.SuspendLayout()
         CType(DGVPayroll, ComponentModel.ISupportInitialize).BeginInit()
@@ -86,9 +87,34 @@ Partial Class PayrollForm
         DGVPayroll.Size = New Size(997, 269)
         DGVPayroll.TabIndex = 0
         ' 
+        ' Column4
+        ' 
+        Column4.HeaderText = "Number of Working Hours"
+        Column4.Name = "Column4"
+        Column4.ReadOnly = True
+        ' 
+        ' Column5
+        ' 
+        Column5.HeaderText = "Wage"
+        Column5.Name = "Column5"
+        Column5.ReadOnly = True
+        ' 
+        ' Column6
+        ' 
+        Column6.HeaderText = "Total Deductions"
+        Column6.Name = "Column6"
+        Column6.ReadOnly = True
+        ' 
+        ' Column8
+        ' 
+        Column8.HeaderText = "Net Wage"
+        Column8.Name = "Column8"
+        Column8.ReadOnly = True
+        ' 
         ' pnlPayrollInformation
         ' 
         pnlPayrollInformation.BackColor = SystemColors.ControlLightLight
+        pnlPayrollInformation.Controls.Add(btnSave)
         pnlPayrollInformation.Controls.Add(lblPagIbigValue)
         pnlPayrollInformation.Controls.Add(lblPhilHealthValue)
         pnlPayrollInformation.Controls.Add(lblSssValue)
@@ -135,7 +161,7 @@ Partial Class PayrollForm
         lblSssValue.AutoSize = True
         lblSssValue.Font = New Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point)
         lblSssValue.ForeColor = Color.FromArgb(CByte(56), CByte(59), CByte(62))
-        lblSssValue.Location = New Point(224, 264)
+        lblSssValue.Location = New Point(232, 264)
         lblSssValue.Name = "lblSssValue"
         lblSssValue.Size = New Size(0, 25)
         lblSssValue.TabIndex = 17
@@ -295,29 +321,15 @@ Partial Class PayrollForm
         btnPaySlip.Text = "Payslip"
         btnPaySlip.UseVisualStyleBackColor = False
         ' 
-        ' Column4
+        ' btnSave
         ' 
-        Column4.HeaderText = "Number of Working Hours"
-        Column4.Name = "Column4"
-        Column4.ReadOnly = True
-        ' 
-        ' Column5
-        ' 
-        Column5.HeaderText = "Wage"
-        Column5.Name = "Column5"
-        Column5.ReadOnly = True
-        ' 
-        ' Column6
-        ' 
-        Column6.HeaderText = "Total Deductions"
-        Column6.Name = "Column6"
-        Column6.ReadOnly = True
-        ' 
-        ' Column8
-        ' 
-        Column8.HeaderText = "Net Wage"
-        Column8.Name = "Column8"
-        Column8.ReadOnly = True
+        btnSave.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point)
+        btnSave.Location = New Point(798, 268)
+        btnSave.Name = "btnSave"
+        btnSave.Size = New Size(170, 44)
+        btnSave.TabIndex = 20
+        btnSave.Text = "Save"
+        btnSave.UseVisualStyleBackColor = True
         ' 
         ' PayrollForm
         ' 
@@ -364,4 +376,5 @@ Partial Class PayrollForm
     Friend WithEvents Column5 As DataGridViewTextBoxColumn
     Friend WithEvents Column6 As DataGridViewTextBoxColumn
     Friend WithEvents Column8 As DataGridViewTextBoxColumn
+    Friend WithEvents btnSave As Button
 End Class

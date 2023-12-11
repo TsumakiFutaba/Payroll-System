@@ -24,7 +24,7 @@ Public Class ITCreateAccount
         'cmd.ExecuteNonQuery()
         ' (ID, Name, Age, Gender, Birthday, Email, Position, Username, Password, SSS, Philhealth, Pagibig) 
 
-        cmd = New SqlCommand("INSERT INTO Employee_Info VALUES (@employee_id, @employee_name, @age, @gender, @bday, @email, @position, @usrname, @pw, @sss, @philhealth, @pagibig)", con)
+        cmd = New SqlCommand("INSERT INTO Employee_Info VALUES (@employee_id, @employee_name, @age, @gender, @bday, @email, @position, @usrname, @pw, @sss, @philhealth, @pagibig, @secretpw, @basigwage)", con)
 
         cmd.Parameters.AddWithValue("@employee_id", tbID.Text)
         cmd.Parameters.AddWithValue("@employee_name", tbName.Text)
@@ -38,6 +38,9 @@ Public Class ITCreateAccount
         cmd.Parameters.AddWithValue("@sss", tbSSS.Text)
         cmd.Parameters.AddWithValue("@philhealth", tbPhilhealth.Text)
         cmd.Parameters.AddWithValue("@pagibig", tbPagIbig.Text)
+        cmd.Parameters.AddWithValue("@secretpw", tbSecretPassword.Text)
+        cmd.Parameters.AddWithValue("@basigwage", 0)
+
 
 
         cmd.ExecuteNonQuery()

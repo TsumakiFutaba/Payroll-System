@@ -2,26 +2,27 @@
 Imports Microsoft.VisualBasic.ApplicationServices
 
 Public Class AccountingTaxDeductions
-
-    Dim conn As String = ("Data Source=DESKTOP-V5VR7RP\SQLEXPRESS;Initial Catalog=payrolldatabase;Integrated Security=true")
+    Dim engine = "localhost, 1433"
+    Dim db = "payrolldatabase"
+    Dim conn As String = ($"Data Source={engine};Initial Catalog={db};Integrated Security=true")
 
     Public Sub SearchID()
         Dim ID As Integer = Integer.Parse(tbSearchBar.Text)
-        Dim query As String = "SELECT * FROM Employee_Info WHERE ID = @ID"
+        Dim query As String = "SELECT * FROM Employee_Info WHERE employee_id =@employee_id"
 
         Using connection As New SqlConnection(conn)
             connection.Open()
 
 
             Using cmd As New SqlCommand(query, connection)
-                cmd.Parameters.AddWithValue("@ID", ID)
+                cmd.Parameters.AddWithValue("@employee_id", ID)
 
                 Using reader As SqlDataReader = cmd.ExecuteReader()
                     If reader.Read() Then
-                        Dim name As String = reader("Name").ToString
-                        Dim SSS As Integer = reader("SSS").ToString
-                        Dim Philhealth As Integer = reader("Philhealth").ToString
-                        Dim PagIbig As Integer = reader("PagIbig").ToString
+                        Dim name As String = reader("employee_name").ToString
+                        Dim SSS As Integer = reader("sss").ToString
+                        Dim Philhealth As Integer = reader("philhealth").ToString
+                        Dim PagIbig As Integer = reader("pagibig").ToString
 
                         Label1.Text = name
                         tbSSS.Text = SSS
@@ -42,14 +43,14 @@ Public Class AccountingTaxDeductions
         Dim currentSSS As String = GetCurrentSSSFromDatabase(searchedID)
 
         If currentSSS IsNot Nothing Then
-            Dim query As String = "UPDATE Employee_Info SET SSS = @NewSSS WHERE ID = @ID"
+            Dim query As String = "UPDATE Employee_Info SET sss = @NewSSS WHERE employee_id = @employee_id"
 
             Using connection As New SqlConnection(conn)
                 connection.Open()
 
                 Using cmd As New SqlCommand(query, connection)
                     cmd.Parameters.AddWithValue("@NewSSS", newSSS)
-                    cmd.Parameters.AddWithValue("@ID", searchedID)
+                    cmd.Parameters.AddWithValue("@employee_id", searchedID)
 
                     Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
@@ -75,18 +76,18 @@ Public Class AccountingTaxDeductions
     End Sub
     Private Function GetCurrentSSSFromDatabase(ByVal ID As Integer) As String
         Dim currentSSS As String = Nothing
-        Dim query As String = "SELECT SSS FROM Employee_Info WHERE ID = @ID"
+        Dim query As String = "SELECT sss FROM Employee_Info WHERE employee_id = @employee_id"
 
         Using connection As New SqlConnection(conn)
             connection.Open()
 
             Using cmd As New SqlCommand(query, connection)
-                cmd.Parameters.AddWithValue("@ID", ID)
+                cmd.Parameters.AddWithValue("@employee_id", ID)
 
                 Dim reader As SqlDataReader = cmd.ExecuteReader()
 
                 If reader.Read() Then
-                    currentSSS = reader("SSS").ToString()
+                    currentSSS = reader("sss").ToString()
                 End If
             End Using
         End Using
@@ -105,14 +106,14 @@ Public Class AccountingTaxDeductions
             Dim currentPhilhealth As String = GetCurrentPhilhealthFromDatabase(searchedID)
 
             If currentPhilhealth IsNot Nothing Then
-                Dim query As String = "UPDATE Employee_Info SET Philhealth = @NewPhilhealth WHERE ID = @ID"
+                Dim query As String = "UPDATE Employee_Info SET philhealth = @NewPhilhealth WHERE employee_id = @employee_id"
 
                 Using connection As New SqlConnection(conn)
                     connection.Open()
 
                     Using cmd As New SqlCommand(query, connection)
                         cmd.Parameters.AddWithValue("@NewPhilhealth", newPhilhealth)
-                        cmd.Parameters.AddWithValue("@ID", searchedID)
+                        cmd.Parameters.AddWithValue("@employee_id", searchedID)
 
                         Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
@@ -133,18 +134,18 @@ Public Class AccountingTaxDeductions
 
     Private Function GetCurrentPhilhealthFromDatabase(ByVal ID As Integer) As String
         Dim currentPhilhealth As String = Nothing
-        Dim query As String = "SELECT Philhealth FROM Employee_Info WHERE ID = @ID"
+        Dim query As String = "SELECT philhealth FROM Employee_Info WHERE employee_id = @employee_id"
 
         Using connection As New SqlConnection(conn)
             connection.Open()
 
             Using cmd As New SqlCommand(query, connection)
-                cmd.Parameters.AddWithValue("@ID", ID)
+                cmd.Parameters.AddWithValue("@employee_id", ID)
 
                 Dim reader As SqlDataReader = cmd.ExecuteReader()
 
                 If reader.Read() Then
-                    currentPhilhealth = reader("Philhealth").ToString()
+                    currentPhilhealth = reader("philhealth").ToString()
                 End If
             End Using
         End Using
@@ -160,14 +161,14 @@ Public Class AccountingTaxDeductions
             Dim currentPagIbig As String = GetCurrentPagIbigFromDatabase(searchedID)
 
             If currentPagIbig IsNot Nothing Then
-                Dim query As String = "UPDATE Employee_Info SET Pagibig = @NewPagibig WHERE ID = @ID"
+                Dim query As String = "UPDATE Employee_Info SET pagibig = @NewPagibig WHERE employee_id = @employee_id"
 
                 Using connection As New SqlConnection(conn)
                     connection.Open()
 
                     Using cmd As New SqlCommand(query, connection)
                         cmd.Parameters.AddWithValue("@NewPagibig", newPagIbig)
-                        cmd.Parameters.AddWithValue("@ID", searchedID)
+                        cmd.Parameters.AddWithValue("@employee_id", searchedID)
 
                         Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
@@ -188,18 +189,18 @@ Public Class AccountingTaxDeductions
 
     Private Function GetCurrentPagIbigFromDatabase(ByVal ID As Integer) As String
         Dim currentPagIbig As String = Nothing
-        Dim query As String = "SELECT Pagibig FROM Employee_Info WHERE ID = @ID"
+        Dim query As String = "SELECT pagibig FROM Employee_Info WHERE employee_id = @employee_id"
 
         Using connection As New SqlConnection(conn)
             connection.Open()
 
             Using cmd As New SqlCommand(query, connection)
-                cmd.Parameters.AddWithValue("@ID", ID)
+                cmd.Parameters.AddWithValue("@employee_id", ID)
 
                 Dim reader As SqlDataReader = cmd.ExecuteReader()
 
                 If reader.Read() Then
-                    currentPagIbig = reader("Pagibig").ToString()
+                    currentPagIbig = reader("pagibig").ToString()
                 End If
             End Using
         End Using
