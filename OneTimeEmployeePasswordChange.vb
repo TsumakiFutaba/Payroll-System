@@ -33,6 +33,8 @@ Public Class OneTimeEmployeePasswordChange
 
                 If sql_updated_rows > 0 Then
                     MessageBox.Show("Password successfully changes.")
+                    Me.Hide()
+                    LogInForm.Show()
                 Else
                     MessageBox.Show($"Cannot change password.{vbCrLf}Check password conditions.")
                 End If

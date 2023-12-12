@@ -21,7 +21,7 @@ Public Class PayrollForm
         Dim USERNAME As String = lblNameValue.Text
         Dim query As String = "SELECT * FROM Employee_Info WHERE employee_id=@employee_id"
         Dim totalQuery As String = "SELECT SUM(totalHours) AS TotalSum FROM Employee_Attendances WHERE USERNAME=@USERNAME"
-        Dim deductionQuery As String = "SELECT * FROM Employee_Info (ISNULL(sss, 0) + ISNULL(philhealth, 0) + ISNULL(pagibig, 0)) AS TotalSum FROM Employee_Info WHERE usrname=@usrname"
+        Dim deductionQuery As String = "SELECT (ISNULL(sss, 0) + ISNULL(philhealth, 0) + ISNULL(pagibig, 0)) AS TotalSum FROM Employee_Info WHERE usrname=@USERNAME"
 
 
         Using con As New SqlConnection(conn)
@@ -34,14 +34,14 @@ Public Class PayrollForm
                 Using reader As SqlDataReader = cmd.ExecuteReader()
                     If reader.Read() Then
                         Dim name As String = reader("employee_name").ToString
-                        Dim SSS As Integer = reader("sss").ToString
-                        Dim Philhealth As Integer = reader("philhealth").ToString
-                        Dim PagIbig As Integer = reader("pagibig").ToString
+                        Dim sss As Integer = reader("sss").ToString
+                        Dim philhealth As Integer = reader("philhealth").ToString
+                        Dim pagibig As Integer = reader("pagibig").ToString
                         Dim BasicHourlyWage As Integer = reader("basicwage").ToString
                         lblNameValue.Text = name.ToUpper
-                        lblSssValue.Text = SSS
-                        lblPhilHealthValue.Text = Philhealth
-                        lblPagIbigValue.Text = PagIbig
+                        lblSssValue.Text = sss
+                        lblPhilHealthValue.Text = philhealth
+                        lblPagIbigValue.Text = pagibig
                         lblBasicSalaryValue.Text = BasicHourlyWage
                     Else
 
@@ -56,10 +56,10 @@ Public Class PayrollForm
         Using con As New SqlConnection(conn)
             con.Open()
 
-            Using cmd As New SqlCommand(totalQuery, con)
-                cmd.Parameters.AddWithValue("@USERNAME", lblNameValue.Text)
+            Using cmd2 As New SqlCommand(totalQuery, con)
+                cmd2.Parameters.AddWithValue("@USERNAME", lblNameValue.Text)
 
-                Using reader As SqlDataReader = cmd.ExecuteReader()
+                Using reader As SqlDataReader = cmd2.ExecuteReader()
                     If reader.Read() Then
                         Dim totalSum As Integer = If(reader.IsDBNull(0), 0, reader.GetInt32(0))
                         If DGVPayroll.Rows.Count > 0 AndAlso DGVPayroll.Columns.Count > 0 Then
@@ -76,10 +76,10 @@ Public Class PayrollForm
         Using con As New SqlConnection(conn)
             con.Open()
 
-            Using cmd As New SqlCommand(totalQuery, con)
-                cmd.Parameters.AddWithValue("@USERNAME", lblNameValue.Text)
+            Using cmd3 As New SqlCommand(totalQuery, con)
+                cmd3.Parameters.AddWithValue("@USERNAME", lblNameValue.Text)
 
-                Using reader As SqlDataReader = cmd.ExecuteReader()
+                Using reader As SqlDataReader = cmd3.ExecuteReader()
                     If reader.Read() Then
                         Dim totalSum As Integer = If(reader.IsDBNull(0), 0, reader.GetInt32(0))
                         Dim basicsalary As Integer = Convert.ToInt32(lblBasicSalaryValue.Text)
@@ -97,10 +97,10 @@ Public Class PayrollForm
         Using con As New SqlConnection(conn)
             con.Open()
 
-            Using cmd As New SqlCommand(deductionQuery, con)
-                cmd.Parameters.AddWithValue("@usrname", lblNameValue.Text)
+            Using cmd4 As New SqlCommand(deductionQuery, con)
+                cmd4.Parameters.AddWithValue("@USERNAME", lblNameValue.Text)
 
-                Using reader As SqlDataReader = cmd.ExecuteReader()
+                Using reader As SqlDataReader = cmd4.ExecuteReader()
                     If reader.Read() Then
                         Dim totalSum As Integer = If(reader.IsDBNull(0), 0, reader.GetInt32(0))
                         If DGVPayroll.Rows.Count > 0 AndAlso DGVPayroll.Columns.Count > 0 Then
@@ -116,10 +116,10 @@ Public Class PayrollForm
         Using con As New SqlConnection(conn)
             con.Open()
 
-            Using cmd As New SqlCommand(deductionQuery, con)
-                cmd.Parameters.AddWithValue("@usrname", lblNameValue.Text)
+            Using cmd5 As New SqlCommand(deductionQuery, con)
+                cmd5.Parameters.AddWithValue("@USERNAME", lblNameValue.Text)
 
-                Using reader As SqlDataReader = cmd.ExecuteReader()
+                Using reader As SqlDataReader = cmd5.ExecuteReader()
                     If reader.Read() Then
                         Dim totalSum As Integer = If(reader.IsDBNull(0), 0, reader.GetInt32(0))
                         Dim Wages As Integer = Convert.ToInt32(DGVPayroll.Rows(0).Cells(1).Value)
@@ -131,6 +131,7 @@ Public Class PayrollForm
                     End If
                 End Using
             End Using
+            con.Close()
         End Using
     End Sub
 

@@ -40,15 +40,15 @@ Public Class BackupDatabase
         con.Open()
         Dim str1 As String = String.Format("ALTER DATABASE [" + database + "] SET SINGLE_USER WITH ROLLBACK IMMEDIATE")
         Dim cmd1 As New SqlCommand(str1, con)
-        cmd.ExecuteNonQuery()
+        cmd1.ExecuteNonQuery()
 
-        Dim str2 As String = "USE MASTER RESTORE DATABASE [" + database + "] FROM DISK ='" + tbLocation2.Text + "WITH REPLACE"
+        Dim str2 As String = "USE MASTER RESTORE DATABASE [" + database + "] FROM DISK ='" + tbLocation2.Text + "' WITH REPLACE"
         Dim cmd2 As New SqlCommand(str2, con)
-        cmd.ExecuteNonQuery()
+        cmd2.ExecuteNonQuery()
 
         Dim str3 As String = String.Format("ALTER DATABASE [" + database + "] SET MULTI_USER")
         Dim cmd3 As New SqlCommand(str3, con)
-        cmd.ExecuteNonQuery()
+        cmd3.ExecuteNonQuery()
 
         MessageBox.Show("Restoration of Database done successfully!")
         con.Close()
